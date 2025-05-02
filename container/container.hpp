@@ -75,7 +75,7 @@ virtual ~ClearableContainer() = default; // Destructor
 
   /* ************************************************************************ */
 
-  virtual void Clear()= 0; //container reset at 0
+  virtual void Clear()= 0; //container reset at 0 value 
 };
 
 /* ************************************************************************** */
@@ -100,7 +100,7 @@ public:
   /* ************************************************************************ */
 
   ResizableContainer& operator = (const ResizableContainer&)=delete;
-  ResizableContainer& operator =(ResizableContainer&&) noexcept=delete;
+  ResizableContainer& operator = (ResizableContainer&&) noexcept=delete;
   /* ************************************************************************ */
 
   // Comparison operators
