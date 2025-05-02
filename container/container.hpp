@@ -28,6 +28,7 @@ public:
 
   Container& operator=(const Container&)=delete;
   Container& operator=(const Container&&) noexcept=delete;
+   //cannot move or copy obj "Container" type
 
   /* ************************************************************************ */
 
@@ -74,7 +75,7 @@ virtual ~ClearableContainer() = default; // Destructor
 
   /* ************************************************************************ */
 
-  virtual void Clear()= 0;
+  virtual void Clear()= 0; //container reset at 0
 };
 
 /* ************************************************************************** */
