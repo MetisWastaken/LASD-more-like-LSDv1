@@ -65,8 +65,8 @@ virtual ~ClearableContainer() = default; // Destructor
 
   /* ************************************************************************ */
 
-  ClearableContainer& operator=(const ClearableContainer&)=delete;
-  ClearableContainer& operator=(const ClearableContainer&&) noexcept=delete;
+  ClearableContainer& operator=(const ClearableContainer&)=delete; //copy
+  ClearableContainer& operator=(const ClearableContainer&&) noexcept=delete; //move
 
   /* ************************************************************************ */
 
