@@ -38,7 +38,7 @@ virtual ~TraversableContainer() = default;
   /* ************************************************************************ */
 
   TraversableContainer& operator=(const TraversableContainer&) = delete;
-  TraversableContainer& operator=(const TraversableContainer&&) noexcept = delete;
+  TraversableContainer& operator=(TraversableContainer&&) noexcept = delete;
 
   // Copy assignment
   // type operator=(argument); // Copy assignment of abstract types is not possible.
@@ -49,7 +49,7 @@ virtual ~TraversableContainer() = default;
   /* ************************************************************************ */
 
   bool operator == (const TraversableContainer&) const noexcept = delete;
-  bool operator != (const TraversableContainer&&) const noexcept = delete; 
+  bool operator != (TraversableContainer&&) const noexcept = delete; 
 
 
   // Comparison operators
@@ -60,6 +60,7 @@ virtual ~TraversableContainer() = default;
   
 
   using TraverseFun = std::function<void(const Data &)>;
+
 
   template <typename Accumulator>
   using FoldFun = std::function<Accumulator(const Data &, const Accumulator &)>;
@@ -87,7 +88,7 @@ virtual ~TraversableContainer() = default;
 /* ************************************************************************** */
 
 template <typename Data>
-class PreOrderTraversableContainer::Traverse(TraverseFun fun) const {
+class PreOrderTraversableContainer: virtual public TraversableContainer<Data>{
   // Must extend TraversableContainer<Data>
 
 private:
@@ -106,8 +107,8 @@ public:
   /* ************************************************************************ */
 
 
-  PostOrderTraversableContainer& operator=(const PostOrderTraversableContainer&) = delete;                  
-  PostOrderTraversableContainer& operator=(PostOrderTraversableContainer&&) noexcept = delete;
+  PreOrderTraversableContainer& operator=(const PreOrderTraversableContainer&) = delete;                  
+  PreOrderTraversableContainer& operator=(PreOrderTraversableContainer&&) noexcept = delete;
   // Copy assignment
   // type operator=(argument); // Copy assignment of abstract types is not possible.
 
@@ -117,8 +118,8 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const PostOrderTraversableContainer&) const noexcept = delete;
-  bool operator!=(const PostOrderTraversableContainer&) const noexcept = delete;
+  bool operator==(const PreOrderTraversableContainer&) const noexcept = delete;
+  bool operator!=(const PreOrderTraversableContainer&) const noexcept = delete;
 
   // type operator==(argument) specifiers; // Comparison of abstract types might be possible.
   // type operator!=(argument) specifiers; // Comparison of abstract types might be possible.
@@ -132,10 +133,10 @@ public:
     template <typename Accumulator>
     using FoldFun = typename TraversableContainer<Data>::FoldFun<Accumulator>;
 
-    virtual void PostOrderTraverse(TraverseFun) const = 0;
+    virtual void PreOrderTraverse(TraverseFun) const = 0;
 
     template <typename Accumulator>
-    Accumulator PostOrderFold(FoldFun<Accumulator>, Accumulator) const;
+    Accumulator PreOrderFold(FoldFun<Accumulator>, Accumulator) const;
   
   
 
@@ -144,11 +145,13 @@ public:
   // Specific member function (inherited from TraversableContainer)
 
   // type Traverse(arguments) specifiers; // Override TraversableContainer member
-  void Traverse(TraverseFun) const override;
+
+  void Traverse(TraverseFun fun) const override{
+    PreOrderTraverse(fun);
+  }
 
 };
 
-//Fine 2/05 qui
 
 /* ************************************************************************** */
 
@@ -171,8 +174,8 @@ public:
 
   /* ************************************************************************ */
 
-  ~PostOrderTraversableContainer& operator=(const PostOrderTraversableContainer&)=delete;
-   PostOrderTraversableContainer& operator=(PostOrderTraversableContainer&&) noexcept = delete;
+  PostOrderTraversableContainer& operator=(const PostOrderTraversableContainer&)=delete;
+  PostOrderTraversableContainer& operator=(PostOrderTraversableContainer&&) noexcept = delete;
 
   // Copy assignment
   // type operator=(argument); // Copy assignment of abstract types is not possible.
@@ -194,21 +197,24 @@ public:
 
   // Specific member function
 
-  // using typename TraversableContainer<Data>::TraverseFun;
+  using typename::TraversableContainer<Data>::TraverseFun;
 
-  // type PostOrderTraverse(arguments) specifiers;
+  template template <typename Accumulator>
 
-  // template <typename Accumulator>
-  // using FoldFun = typename TraversableContainer<Data>::FoldFun<Accumulator>;
+  using FoldFun = typename TraversableContainer<Data>::FoldFun<Accumulator>;
 
-  // template <typename Accumulator>
-  // type PostOrderFold(arguments) specifiers;
+  virtual void PostOrderTraverse(TraverseFun) const = 0;
+
+  template <typename Accumulator>
+  Accumulator PostOrderFold(FoldFun<Accumulator>,Accumulator)const;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from TraversableContainer)
 
-  // type Traverse(arguments) specifiers; // Override TraversableContainer member
+  void Traverse(TraverseFun fun) const override{
+    PostOrderTraverse(fun);
+  } // Override TraversableContainer member
 
 };
 
