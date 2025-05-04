@@ -167,9 +167,12 @@ protected:
 public:
 
   // Destructor
-  // ~PostOrderTraversableContainer() specifiers
+  virtual ~PostOrderTraversableContainer() = default;
 
   /* ************************************************************************ */
+
+  ~PostOrderTraversableContainer& operator=(const PostOrderTraversableContainer&)=delete;
+   PostOrderTraversableContainer& operator=(PostOrderTraversableContainer&&) noexcept = delete;
 
   // Copy assignment
   // type operator=(argument); // Copy assignment of abstract types is not possible.
@@ -178,6 +181,10 @@ public:
   // type operator=(argument); // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
+
+  bool operator==(const PostOrderTraversableContainer&) const noexcept=delete;
+  bool operator!=(const PostOrderTraversableContainer&) const noexcept=delete;
+
 
   // Comparison operators
   // type operator==(argument) specifiers; // Comparison of abstract types might be possible.
