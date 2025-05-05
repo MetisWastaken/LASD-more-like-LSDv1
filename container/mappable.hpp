@@ -129,7 +129,7 @@ public:
 /* ************************************************************************** */
 
 template <typename Data>
-class PostOrderMappableContainer {
+class PostOrderMappableContainer: virtual public MappableContainer<Data>, virtual public PostOrderTraversableContainer<Data> {
   // Must extend MappableContainer<Data>,
   //             PostOrderTraversableContainer<Data>
 
