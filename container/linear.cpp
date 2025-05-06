@@ -28,7 +28,7 @@ void MutableLinearContainer<Data>::PostOrderMap(MapFun fun){
 
 template <typename Data>
 void SortableLinearContainer<Data>::Sort()noexcept{
-    InSort(0,size-1);  //dove dovrà essere definito il sort? e come?
+    InSort(0,size-1);  
 }
 
 template<typename Data>
