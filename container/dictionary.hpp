@@ -14,7 +14,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class DictionaryContainer {
+class DictionaryContainer: virtual public TestableContainer<Data>
   // Must extend TestableContainer<Data>
 
 private:
@@ -28,9 +28,12 @@ protected:
 public:
 
   // Destructor
-  // ~DictionaryContainer() specifiers
+  virtual ~DictionaryContainer()=default;
 
   /* ************************************************************************ */
+
+  DictionaryContainer& operator=(const DictionaryContainer&)=delete;
+  DictionaryContainer& operator=(DictionaryContainer&&)noexcept=delete;
 
   // Copy assignment
   // type operator=(argument); // Copy assignment of abstract types is not possible.
@@ -40,6 +43,9 @@ public:
 
   /* ************************************************************************ */
 
+  bool operator==(const DictionaryContainer&)const noexcept=delete;
+  bool operator!=(const DictionaryContainer&)const noexcept=delete;
+
   // Comparison operators
   // type operator==(argument) specifiers; // Comparison of abstract types is not possible.
   // type operator!=(argument) specifiers; // Comparison of abstract types is not possible.
@@ -48,24 +54,24 @@ public:
 
   // Specific member functions
 
-  // type Insert(argument) specifiers; // Copy of the value
-  // type Insert(argument) specifiers; // Move of the value
-  // type Remove(argument) specifiers;
+  virtual void Insert(const Data&)=0; // Copy of the value
+  virtual void Insert(Data&&)=0; // Move of the value
+  virtual void Remove(const Data&)=0;
 
-  // type InsertAll(argument) specifiers; // Copy of the value; From TraversableContainer; True if all are inserted
-  // type InsertAll(argument) specifiers; // Move of the value; From MappableContainer; True if all are inserted
-  // type RemoveAll(argument) specifiers; // From TraversableContainer; True if all are removed
+  bool InsertAll(const TraversableContainer<Data>&); // Copy of the value; From TraversableContainer; True if all are inserted
+  bool InsertAll(MappableContainer<Data>&&); // Move of the value; From MappableContainer; True if all are inserted
+  bool RemoveAll(const TraversableContainer<Data>&); // From TraversableContainer; True if all are removed
 
-  // type InsertSome(argument) specifiers; // Copy of the value; From TraversableContainer; True if some is inserted
-  // type InsertSome(argument) specifiers; // Move of the value; From MappableContainer; True if some is inserted
-  // type RemoveSome(argument) specifiers; // From TraversableContainer; True if some is removed
+  bool InsertSome(const TraversableContainer<Data>&); // Copy of the value; From TraversableContainer; True if some is inserted
+  bool InsertSome(MappableContainer<Data>&&); // Move of the value; From MappableContainer; True if some is inserted
+  bool RemoveSome(const TraversableContainer<Data>&); // From TraversableContainer; True if some is removed
 
 };
 
 /* ************************************************************************** */
 
 template <typename Data>
-class OrderedDictionaryContainer {
+class OrderedDictionaryContainer:virtual public DictionaryContainer<Data> {
   // Must extend DictionaryContainer<Data>
 
 private:
@@ -75,10 +81,13 @@ protected:
 public:
 
   // Destructor
-  // ~OrderedDictionaryContainer() specifiers
+  virtual ~OrderedDictionaryContainer()=default;
 
   /* ************************************************************************ */
 
+  OrderedDictionaryContainer& operator=(const OrderedDictionaryContainer&)=delete;
+  OrderedDictionaryContainer& operator=(OrderedDictionaryContainer&&)noexcept=delete;
+  
   // Copy assignment
   // type operator=(argument); // Copy assignment of abstract types is not possible.
 
@@ -86,6 +95,9 @@ public:
   // type operator=(argument); // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
+
+  bool operator ==(const OrderedDictionaryContainer&)const noexcept=delete;
+  bool operator !=(const OrderedDictionaryContainer&)const noexcept=delete;
 
   // Comparison operators
   // type operator==(argument) specifiers; // Comparison of abstract types is not possible.
@@ -95,21 +107,21 @@ public:
 
   // Specific member functions
 
-  // type Min(argument) specifiers; // (concrete function must throw std::length_error when empty)
-  // type MinNRemove(argument) specifiers; // (concrete function must throw std::length_error when empty)
-  // type RemoveMin(argument) specifiers; // (concrete function must throw std::length_error when empty)
+  const Data& Min()const=0; // (concrete function must throw std::length_error when empty)
+  Data MinNRemove()=0; // (concrete function must throw std::length_error when empty)
+  void RemoveMin()=0; // (concrete function must throw std::length_error when empty)
 
-  // type Max(argument) specifiers; // (concrete function must throw std::length_error when empty)
-  // type MaxNRemove(argument) specifiers; // (concrete function must throw std::length_error when empty)
-  // type RemoveMax(argument) specifiers; // (concrete function must throw std::length_error when empty)
+  const Data& Max()const=0; // (concrete function must throw std::length_error when empty)
+  Data MaxNRemove()=0; // (concrete function must throw std::length_error when empty)
+  void RemoveMax()=0; // (concrete function must throw std::length_error when empty)
 
-  // type Predecessor(argument) specifiers; // (concrete function must throw std::length_error when not found)
-  // type PredecessorNRemove(argument) specifiers; // (concrete function must throw std::length_error when not found)
-  // type RemovePredecessor(argument) specifiers; // (concrete function must throw std::length_error when not found)
+  const Data& Predecessor(const Data&)const=0; // (concrete function must throw std::length_error when not found)
+  Data PredecessorNRemove(const Data&)=0; // (concrete function must throw std::length_error when not found)
+  void RemovePredecessor(const Data&)=0; // (concrete function must throw std::length_error when not found)
 
-  // type Successor(argument) specifiers; // (concrete function must throw std::length_error when not found)
-  // type SuccessorNRemove(argument) specifiers; // (concrete function must throw std::length_error when not found)
-  // type RemoveSuccessor(argument) specifiers; // (concrete function must throw std::length_error when not found)
+  const Successor(const Data&)const=0; // (concrete function must throw std::length_error when not found)
+  Data SuccessorNRemove(const Data&)=0; // (concrete function must throw std::length_error when not found)
+  void RemoveSuccessor(const Data&)=0; // (concrete function must throw std::length_error when not found)
 
 };
 

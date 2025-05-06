@@ -168,7 +168,7 @@ public:
 };
 
 template <typename Data>
-class SortableLinearContainer: virtual publictableLinearContainer<Data>{
+class SortableLinearContainer: virtual public MutableLinearContainer<Data>{
   // Must extend MutableLinearContainer<Data>
 
 private:

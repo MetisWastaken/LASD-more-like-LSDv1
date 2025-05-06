@@ -31,7 +31,12 @@ void SortableLinearContainer<Data>::Sort()noexcept{
     InSort(0,size-1);  //dove dovrà essere definito il sort? e come?
 }
 
-//da qui in poi ho dubbi, da finire
+template<typename Data>
+
+void SortableLinearContainer<Data>::InSort()noexcept{
+    //need help
+
+}
 
 
 /* ************************************************************************** */

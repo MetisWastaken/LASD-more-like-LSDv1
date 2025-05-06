@@ -33,8 +33,9 @@ namespace lasd {
 
     template <typename Data>
     template <typename Accumulator>
-    Accumulator PostOrderTraversableContainer<Data>::PostOrderFold(FoldFun<Accumulator>, Accumulator)const
+    Accumulator PostOrderTraversableContainer<Data>::PostOrderFold(FoldFun<Accumulator> fun, Accumulator accum)const
     {
+        bool exists = false;
         PostOrderTraverse
         (
         [fun,&accum](const Data &data);
