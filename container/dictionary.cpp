@@ -4,18 +4,18 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-bool DictionaryContainer<Data>::InsertAll(const TraversableContainer<Data>& Tcon ){
+inline bool DictionaryContainer<Data>::InsertAll(const TraversableContainer<Data>& Tcon ){
     bool all=true;
     Tcon.Traverse(
         [this,&all](const Data&data){
             all&=Insert(data);
         }
     );
-return all;
+    return all;
 }
 
 template <typename Data>
-bool DictionaryContainer<Data>::InsertAll(MappableContainer<Data>&& Tcon){
+inline DictionaryContainer<Data>::InsertAll(MappableContainer<Data>&& Tcon){
     bool all=true;
 
     Tcon.map(
@@ -28,7 +28,7 @@ bool DictionaryContainer<Data>::InsertAll(MappableContainer<Data>&& Tcon){
 
 template<typename Data>
 
-bool DictionaryContainer<Data>::InsertSome(const TraversableContainer<Data>& Tcon ){
+inline bool DictionaryContainer<Data>::InsertSome(const TraversableContainer<Data>& Tcon ){
     bool some=false;
     Tcon.Traverse(
         [this,&some](const Data&data){
@@ -37,8 +37,9 @@ bool DictionaryContainer<Data>::InsertSome(const TraversableContainer<Data>& Tco
     );
     return some;
 }
+
 template <typename Data>
-bool DictionaryContainer<Data>::InsertSome(MappableContainer<Data>&& Tcon)
+inline bool DictionaryContainer<Data>::InsertSome(MappableContainer<Data>&& Tcon)
 {
     bool some = false;
     Tcon.Map(
@@ -51,7 +52,7 @@ bool DictionaryContainer<Data>::InsertSome(MappableContainer<Data>&& Tcon)
 }
 
 template <typename Data>
-bool DictionaryContainer<Data>::RemoveAll(const TraversableContainer<Data>& Tcon){
+inline bool DictionaryContainer<Data>::RemoveAll(const TraversableContainer<Data>& Tcon){
     bool all=true;
     Tcon.Traverse(
         [this,&all](const Data&data){
@@ -62,7 +63,7 @@ bool DictionaryContainer<Data>::RemoveAll(const TraversableContainer<Data>& Tcon
 }
 
 template<typename Data>
-bool DictionaryContainer<Data>::RemoveSome(const TraversableContainer<Data>& Tcon){
+inline bool DictionaryContainer<Data>::RemoveSome(const TraversableContainer<Data>& Tcon){
     bool some=false;
     Tcon.Traverse(
         [this,&some](const data&data){

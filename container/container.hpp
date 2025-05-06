@@ -16,8 +16,8 @@ private:
 
 protected:
 
-  /* ************************************************************************ */
-  Container()= default; // Default constructor (protected to prevent instantiation of abstract types)
+  /************************************************************************* */
+  Container()= default; // Default constructor 
 
   ulong size = 0;
 
@@ -39,6 +39,13 @@ public:
   
   /* ************************************************************************ */
 
+  inline virtual bool Empty()const noexcept{
+    return(size==0);
+  }
+
+ inline  virtual ulong Size()const noexcept{
+    return size;
+  }
   // Specific member functions
 
   // type Empty() specifiers; // (concrete function should not throw exceptions)
@@ -110,12 +117,14 @@ public:
 
 
   /* ************************************************************************ */
-  virtual void Resize(ulong newdim){size=newdim;}
+  virtual void Resize(ulong)=0; //modified
 
   // type Resize(argument) specifiers;
 
   /* ************************************************************************ */
-  virtual void Clear(){Resize(0);}
+  inline void Clear()override{
+    Resize(0);
+  }
 
   // Specific member function (inherited from ClearableContainer)
 

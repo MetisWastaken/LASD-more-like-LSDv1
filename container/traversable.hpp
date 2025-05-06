@@ -54,7 +54,7 @@ virtual ~TraversableContainer() = default;
 
   // Comparison operators
   // type operator==(argument) specifiers; // Comparison of abstract types might be possible.
-  // type operator!=(argument) specifiers; // Comparison of abstract types might be possible.
+  // type operator!=(argument) specifiers; // Comparison of abstract types might be possible. (Better not to)
 
   /* ************************************************************************ */
   
@@ -65,7 +65,7 @@ virtual ~TraversableContainer() = default;
   template <typename Accumulator>
   using FoldFun = std::function<Accumulator(const Data &, const Accumulator &)>;
 
-  virtual void Traverse(TraverseFun) const = 0; 
+  virtual void Traverse(TraverseFun)const=0; 
   
   template <typename Accumulator>
   Accumulator Fold(FoldFun<Accumulator>, Accumulator) const;

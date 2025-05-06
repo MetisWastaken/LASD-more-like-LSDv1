@@ -38,9 +38,6 @@ virtual ~TestableContainer() = default;
 
   // Copy assignment
   // type operator=(argument); // Copy assignment of abstract types is not possible.
-
- 
-
   // Move assignment
   // type operator=(argument); // Move assignment of abstract types is not possible.
 

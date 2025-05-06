@@ -4,10 +4,10 @@ namespace lasd {
     template<typename Data>
     template<typename Accumulator>
 
-    Accumulator TraversableContainer<Data>::Fold(FoldFun<Accumulator> fun, Accumulator accum)const{
+    inline Accumulator TraversableContainer<Data>::Fold(FoldFun<Accumulator> fun, Accumulator accum)const{
         Traverse( //Prende una serie di parametri e tra tonde l'oggetto da studiare
-            [fun,&accum](const Data obj){
-                accum=fun(obj,accum); //fun definisce il comportamento, e per ogni singolo valore applica la funzione passata in input
+            [fun,&accum](const Data data){
+                accum=fun(data,accum); //fun definisce il comportamento, e per ogni singolo valore applica la funzione passata in input
             }
         );
         return accum;
@@ -26,14 +26,14 @@ namespace lasd {
 
 
     template<typename Data>
-    void PreOrderTraversableContainer<Data>::Traverse(TraverseFun fun) const
+   inline void PreOrderTraversableContainer<Data>::Traverse(TraverseFun fun) const
     {
             PreOrderTraverse(fun);
     }
 
     template <typename Data>
     template <typename Accumulator>
-    Accumulator PostOrderTraversableContainer<Data>::PostOrderFold(FoldFun<Accumulator> fun, Accumulator accum)const
+    inline Accumulator PostOrderTraversableContainer<Data>::PostOrderFold(FoldFun<Accumulator> fun, Accumulator accum)const
     {
         bool exists = false;
         PostOrderTraverse
@@ -49,7 +49,7 @@ namespace lasd {
 
     template <typename Data>
     template <typename Accumulator>
-    Accumulator PreOrderTraversableContainer<Data>::PreOrderFold(FoldFun<Accumulator>, Accumulator)const
+    inline Accumulator PreOrderTraversableContainer<Data>::PreOrderFold(FoldFun<Accumulator>, Accumulator)const
     {
         PreOrderTraverse
         (
