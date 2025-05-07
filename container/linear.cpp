@@ -4,7 +4,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template<typename Data>
-bool LinearContainer<Data>::operator==(const LinearContainer<Data>& dato) const noexcept
+inline bool LinearContainer<Data>::operator==(const LinearContainer<Data>& dato) const noexcept
 {
     if(size!=dato.size){
         return false;
@@ -17,32 +17,60 @@ bool LinearContainer<Data>::operator==(const LinearContainer<Data>& dato) const 
     return true;
 }
 
+template<typename Data>
+inline const Data& LinearContainer<Data>::Front()const{
+    return operator[](0);
+}
+
+template<typename Data>
+inline const Data& LinearContainer<Data>::Back()const{
+    return operator[](size-1);
+}
+
+template<typename Data>
+inline void LinearContainer<Data>::Traverse(TraverseFun fun) const
+{
+    PreOrderTraverse(fun);
+}
+
+template <typename Data> 
+inline void MutableLinearContainer<Data>::Map(Mapfun fun){
+    PreOrderMap(fun);   
+}
+
 template <typename Data>
 void MutableLinearContainer<Data>::PostOrderMap(MapFun fun){
-    if(size>0){
-        for(ulong i=size-1; i>=0;i--){ //double check pls
-            fun(operator[](i));
-        }
+   ulong i=size;
+   while(i>0){
+    fun(operator[](i--));
+   }
+}
+template <typename Data> 
+void LinearContainer<Data>::PreOrderMap(MapFun fun) const
+{
+    for (ulong i=0;i<size;i++)
+    {
+        fun(operator[](i));
     }
 }
 
 template <typename Data>
-void SortableLinearContainer<Data>::InSort()noexcept{
-    InSort(0,size-1);  
+void SortableLinearContainer<Data>::Sort()noexcept{
+    Sort(0,size-1);  
 }
 
 template <typename Data>
-void SortableLinearContainer<Data>::InSort(ulong start, ulong end) noexcept {
-    for (ulong i = start + 1; i <= end; ++i) {
-        Data key = operator[](i);
-        ulong j = i;
-        while (j > start && operator[](j - 1) > key) {
+void SortableLinearContainer<Data>::Sort(ulong start, ulong end)noexcept{
+    for (ulong i=start+1; i<=end; i++) {
+        Data key=operator[](i);
+        ulong j=i;
+        while (j>start && operator[](j-1)>key) {
             // Sposta l'elemento a destra
-            const_cast<Data&>(operator[](j)) = operator[](j - 1);
-            --j;
+            const_cast(operator[](j))=operator[](j-1);
+            j--;
         }
         // Inserisce l'elemento nella posizione corretta
-        const_cast<Data&>(operator[](j)) = key;
+        const_cast<Data&>(operator[](j))=key;
     }
 }
 
