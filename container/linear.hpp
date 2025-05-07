@@ -200,17 +200,8 @@ public:
   /* ************************************************************************ */
 
   // Specific member function
-  void Sort() noexcept;   
 
-protected:
-
-using Container::size;
-using MutableLinearContainer<Data>::operator[];
-using MutableLinearContainer<Data>::Front;
-using MutableLinearContainer<Data>::Back;
-
-//da aggiungere un richiamo alla funzione di sort??
-
+  void InSort()noexcept;
 };
 
 /* ************************************************************************** */

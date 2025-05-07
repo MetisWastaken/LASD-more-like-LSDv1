@@ -27,16 +27,25 @@ void MutableLinearContainer<Data>::PostOrderMap(MapFun fun){
 }
 
 template <typename Data>
-void SortableLinearContainer<Data>::Sort()noexcept{
+void SortableLinearContainer<Data>::InSort()noexcept{
     InSort(0,size-1);  
 }
 
-template<typename Data>
-
-void SortableLinearContainer<Data>::InSort()noexcept{
-    //need help
-
+template <typename Data>
+void SortableLinearContainer<Data>::InSort(ulong start, ulong end) noexcept {
+    for (ulong i = start + 1; i <= end; ++i) {
+        Data key = operator[](i);
+        ulong j = i;
+        while (j > start && operator[](j - 1) > key) {
+            // Sposta l'elemento a destra
+            const_cast<Data&>(operator[](j)) = operator[](j - 1);
+            --j;
+        }
+        // Inserisce l'elemento nella posizione corretta
+        const_cast<Data&>(operator[](j)) = key;
+    }
 }
+
 
 
 /* ************************************************************************** */
