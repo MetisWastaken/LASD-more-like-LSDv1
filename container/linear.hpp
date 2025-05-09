@@ -23,12 +23,12 @@ private:
 
 protected:
 
-  // ...
+  using Container::size;
 
 public:
 
   // Destructor
-  virtual ~LinearContainer()=default;
+  ~LinearContainer()=default;
 
   /* ************************************************************************ */
 
@@ -201,7 +201,7 @@ public:
 
   // Specific member function
 
-  void InSort()noexcept;
+  void Sort()noexcept;
 };
 
 /* ************************************************************************** */

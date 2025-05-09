@@ -1,4 +1,3 @@
-
 namespace lasd {
 
 /* ************************************************************************** */
@@ -28,10 +27,24 @@ inline const Data& LinearContainer<Data>::Back()const{
 }
 
 template<typename Data>
-inline void LinearContainer<Data>::Traverse(TraverseFun fun) const
-{
+inline void LinearContainer<Data>::Traverse(TraverseFun fun) const{
     PreOrderTraverse(fun);
 }
+
+template<typename Data> 
+inline void LinearContainer<Data>::PreOrderTraverse(TraverseFun fun)const{
+    for(ulong i=0; i<size;i++){
+        fun(operator[](i));
+    }
+}
+
+inline void LinearContainer<Data>::PostOrderTraverse(TraverseFun fun)const{
+    ulong i=size;
+    while(i>0){
+        fun(operator[](i--));
+    }
+}
+
 
 template <typename Data> 
 inline void MutableLinearContainer<Data>::Map(Mapfun fun){
