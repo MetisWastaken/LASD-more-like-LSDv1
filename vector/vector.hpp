@@ -1,4 +1,3 @@
-
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
@@ -13,7 +12,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class Vector: virtual public MutableLinearContainer<Data>, virtual public ResizableContainer<Data> {
+class Vector: virtual public MutableLinearContainer<Data>, public ResizableContainer<Data> {
   // Must extend ,
   //             ResizableContainer
 
@@ -23,8 +22,8 @@ private:
 
 protected:
 
-  using Container:size;
-  Data*Elements=*nullptr;
+  using Container::size;
+  Data* Elements = nullptr;
   // ...
 
 public:
@@ -105,8 +104,6 @@ public:
   // Specific member function (inherited from ClearableContainer)
   // type Clear() specifiers; // Override ClearableContainer member
 
-  void Resize(const ulong)override;
-
 protected:
 
   // Auxiliary functions, if necessary!
@@ -126,15 +123,15 @@ private:
 
 protected:
 
-using Container:size;
-Data*Elements=*nullptr;
+  using Container::size;
+  Data* Elements = nullptr;
 
   // ...
 
 public:
 
   // Default constructor
-  SortableVector()=default
+  SortableVector()=default;
 
   /* ************************************************************************ */
 

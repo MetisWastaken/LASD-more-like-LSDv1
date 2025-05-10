@@ -1,93 +1,65 @@
 namespace lasd {
 
-/* ************************************************************************** */
-
 template<typename Data>
-inline bool LinearContainer<Data>::operator==(const LinearContainer<Data>& dato) const noexcept
-{
-    if(size!=dato.size){
-        return false;
-    }
-    for (ulong i = 0; i < size; i++)
-    {
-        if (operator[](i) != dato.operator[](i))
-            return false;
-    }
-    return true;
+inline bool LinearContainer<Data>::operator==(const LinearContainer<Data>& data) const noexcept {
+  if (size != data.size) return false;
+  for (ulong i = 0; i < size; i++) {
+    if (operator[](i) != data[i]) return false;
+  }
+  return true;
 }
 
 template<typename Data>
-inline const Data& LinearContainer<Data>::Front()const{
-    return operator[](0);
+inline void LinearContainer<Data>::PreOrderTraverse(TraverseFun fun) const {
+  for (ulong i = 0; i < size; i++) {
+    fun(operator[](i));
+  }
 }
 
 template<typename Data>
-inline const Data& LinearContainer<Data>::Back()const{
-    return operator[](size-1);
+inline void LinearContainer<Data>::PostOrderTraverse(TraverseFun fun) const {
+  for (long i = size - 1; i >= 0; i--) {
+    fun(operator[](i));
+  }
 }
 
 template<typename Data>
-inline void LinearContainer<Data>::Traverse(TraverseFun fun) const{
-    PreOrderTraverse(fun);
+inline void MutableLinearContainer<Data>::Map(MapFun fun) {
+  PreOrderMap(fun);
 }
 
-template<typename Data> 
-inline void LinearContainer<Data>::PreOrderTraverse(TraverseFun fun)const{
-    for(ulong i=0; i<size;i++){
-        fun(operator[](i));
+template<typename Data>
+inline void MutableLinearContainer<Data>::PreOrderMap(MapFun fun) {
+  for (ulong i = 0; i < size; i++) {
+    fun(operator[](i));
+  }
+}
+
+template<typename Data>
+inline void MutableLinearContainer<Data>::PostOrderMap(MapFun fun) {
+  for (long i = size - 1; i >= 0; i--) {
+    fun(operator[](i));
+  }
+}
+
+template<typename Data>
+inline void SortableLinearContainer<Data>::Sort() noexcept {
+  if (size > 1) {
+    Sort(0, size - 1);
+  }
+}
+
+template<typename Data>
+inline void SortableLinearContainer<Data>::Sort(ulong start, ulong end) noexcept {
+  for (ulong i = start + 1; i <= end; i++) {
+    Data key = (*this)[i];
+    long j = i - 1;
+    while (j >= static_cast<long>(start) && (*this)[j] > key) {
+      const_cast<Data&>((*this)[j + 1]) = (*this)[j];
+      j--;
     }
+    const_cast<Data&>((*this)[j + 1]) = key;
+  }
 }
 
-inline void LinearContainer<Data>::PostOrderTraverse(TraverseFun fun)const{
-    ulong i=size;
-    while(i>0){
-        fun(operator[](i--));
-    }
-}
-
-
-template <typename Data> 
-inline void MutableLinearContainer<Data>::Map(Mapfun fun){
-    PreOrderMap(fun);   
-}
-
-template <typename Data>
-void MutableLinearContainer<Data>::PostOrderMap(MapFun fun){
-   ulong i=size;
-   while(i>0){
-    fun(operator[](i--));
-   }
-}
-template <typename Data> 
-void LinearContainer<Data>::PreOrderMap(MapFun fun) const
-{
-    for (ulong i=0;i<size;i++)
-    {
-        fun(operator[](i));
-    }
-}
-
-template <typename Data>
-void SortableLinearContainer<Data>::Sort()noexcept{
-    Sort(0,size-1);  
-}
-
-template <typename Data>
-void SortableLinearContainer<Data>::Sort(ulong start, ulong end)noexcept{
-    for (ulong i=start+1; i<=end; i++) {
-        Data key=operator[](i);
-        ulong j=i;
-        while (j>start && operator[](j-1)>key) {
-            // Sposta l'elemento a destra
-            const_cast(operator[](j))=operator[](j-1);
-            j--;
-        }
-        // Inserisce l'elemento nella posizione corretta
-        const_cast<Data&>(operator[](j))=key;
-    }
-}
-
-
-
-/* ************************************************************************** */
 }

@@ -1,4 +1,3 @@
-
 #ifndef LINEAR_HPP
 #define LINEAR_HPP
 
@@ -14,7 +13,7 @@ namespace lasd {
 
 template <typename Data>
 class LinearContainer: virtual public PreOrderTraversableContainer<Data>, virtual public PostOrderTraversableContainer<Data> {
-  // Must extend PreOr  derTraversableContainer<Data>,  
+  // Must extend PreOrderTraversableContainer<Data>,  
   //             PostOrderTraversableContainer<Data>
 
 private:
@@ -56,13 +55,16 @@ public:
   // Specific member functions
 
   virtual const Data& operator[](ulong)const=0; // (non-mutable version; concrete function must throw std::out_of_range when out of range)
+  
 
   virtual const Data& Front() const { 
-     return operator[](0); 
+    if (size == 0) throw std::length_error("Front: container is empty");
+    return (*this)[0]; 
   } // (non-mutable version; concrete function must throw std::length_error when empty)
 
   virtual const Data& Back() const { 
-     return operator[](0); //double check pls
+    if (size == 0) throw std::length_error("Back: container is empty");
+    return operator[](size-1); //double check pls
   } // (non-mutable version; concrete function must throw std::length_error when empty) //da rivedere, not sure
    
 
@@ -76,7 +78,7 @@ public:
 
   /* ************************************************************************ */
 
-  void PreOrderTraverse(TraverseFun) const override
+  void PreOrderTraverse(TraverseFun) const override;
 
   // Specific member function (inherited from PreOrderTraversableContainer)
 
@@ -131,17 +133,24 @@ public:
   // type operator[](argument) specifiers; // (mutable version; concrete function must throw std::out_of_range when out of range)
 
   virtual const Data& operator[](ulong)const=0; 
+  virtual Data& operator[](ulong) = 0;
+
+
 
   // type Front() specifiers; // (mutable version; concrete function must throw std::length_error when empty)
 
   virtual const Data& Front() const { 
-      return operator[](0); 
+     if (this->size == 0) throw std::length_error("Front: container is empty");
+      return (*this)[0]; 
     } 
 
   // type Back() specifiers; // (mutable version; concrete function must throw std::length_error when empty)
 
     virtual const Data& Back() const { 
-      return operator[](0); //double check pls
+
+      if (this->size == 0) throw std::length_error("Back: container is empty");
+
+      return (*this)[this->size-1]; //double check pls
     } 
 
 
@@ -157,13 +166,13 @@ public:
 
   // Specific member function (inherited from PreOrderMappableContainer)
 
-  void PreOrderMap(Mapfun) override; // Override PreOrderMappableContainer member
+  void PreOrderMap(MapFun) override; // Override PreOrderMappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderMappableContainer)
 
-  void PostOrderMap(MapFun) override/ Override PostOrderMappableContainer member
+  void PostOrderMap(MapFun) override;
 
 };
 
@@ -177,7 +186,7 @@ private:
 
 protected:   
 
-  // ...
+ void Sort(ulong, ulong) noexcept;
 
 public:
 

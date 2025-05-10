@@ -62,7 +62,7 @@ virtual ~MappableContainer() = default;
 
   using MapFun = std::function<void(Data &)>;
 
-  type Map(MapFun)=0;
+  virtual void Map(MapFun)=0;
 
 };
 
@@ -115,7 +115,7 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  virtual void type PreOrderMap(MapFun)=0;
+  virtual void PreOrderMap(MapFun)=0;
 
   /* ************************************************************************ */
 
@@ -148,8 +148,8 @@ public:
 
   /* ************************************************************************ */
 
-  PreOrderMappableContainer& operator = (const PreOrderMappableContainer&) = delete;
-  PreOrderMappableContainer& operator = (PreOrderMappableContainer&&) noexcept = delete;          
+  PostOrderMappableContainer& operator = (const PostOrderMappableContainer&) = delete;
+  PostOrderMappableContainer& operator = (PostOrderMappableContainer&&) noexcept = delete;          
 
   // Copy assignment
   // type operator=(argument); // Copy assignment of abstract types is not possible.
@@ -159,8 +159,8 @@ public:
 
   /* ************************************************************************ */
 
-  bool operator == (const PreOrderMappableContainer&) const noexcept = delete;
-  bool operator != (const PreOrderMappableContainer&) const noexcept = delete;
+  bool operator == (const PostOrderMappableContainer&) const noexcept = delete;
+  bool operator != (const PostOrderMappableContainer&) const noexcept = delete;
 
   // Comparison operators
   // type operator==(argument) specifiers; // Comparison of abstract types is not possible.
