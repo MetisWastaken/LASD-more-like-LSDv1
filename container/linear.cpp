@@ -24,7 +24,7 @@ inline void LinearContainer<Data>::PostOrderTraverse(TraverseFun fun) const {
 }
 
 template<typename Data>
-inline void MutableLinearContainer<Data>::Map(MapFun fun) {
+inline void MutableLinearContainer<Data>::Map(MapFun fun) { //test
   PreOrderMap(fun);
 }
 
