@@ -56,7 +56,7 @@ public:
 
 /* ************************************************************************** */
 
-class ClearableContainer: public Container {
+class ClearableContainer: virtual public Container {
   // Must extend Container
 private:
 

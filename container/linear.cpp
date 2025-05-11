@@ -24,11 +24,6 @@ inline void LinearContainer<Data>::PostOrderTraverse(TraverseFun fun) const {
 }
 
 template<typename Data>
-inline void MutableLinearContainer<Data>::Map(MapFun fun) { //test
-  PreOrderMap(fun);
-}
-
-template<typename Data>
 inline void MutableLinearContainer<Data>::PreOrderMap(MapFun fun) {
   for (ulong i = 0; i < size; i++) {
     fun(operator[](i));
@@ -45,12 +40,12 @@ inline void MutableLinearContainer<Data>::PostOrderMap(MapFun fun) {
 template<typename Data>
 inline void SortableLinearContainer<Data>::Sort() noexcept {
   if (size > 1) {
-    Sort(0, size - 1);
+    InsertionSort(0, size - 1);
   }
 }
 
 template<typename Data>
-inline void SortableLinearContainer<Data>::Sort(ulong start, ulong end) noexcept {
+inline void SortableLinearContainer<Data>::InsertionSort(ulong start, ulong end) noexcept {
   for (ulong i = start + 1; i <= end; i++) {
     Data key = (*this)[i];
     long j = i - 1;

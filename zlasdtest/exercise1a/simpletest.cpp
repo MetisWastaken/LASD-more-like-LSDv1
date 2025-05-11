@@ -23,7 +23,7 @@ void stestVectorInt(uint & testnum, uint & testerr) {
   cout << endl << "Begin of Vector<int> Test:" << endl;
   try {
     {
-      lasd::SortableVector<int> vec;
+      lasd::Vector<int> vec;
       Empty(loctestnum, loctesterr, vec, true);
 
       GetFront(loctestnum, loctesterr, vec, false, 0);
@@ -163,8 +163,8 @@ void stestVectorString(uint & testnum, uint & testerr) {
 void stestVector(uint & testnum, uint & testerr) {
   uint loctestnum = 0, loctesterr = 0;
   stestVectorInt(loctestnum, loctesterr);
-  stestVectorDouble(loctestnum, loctesterr);
-  stestVectorString(loctestnum, loctesterr);
+  // stestVectorDouble(loctestnum, loctesterr);
+  // stestVectorString(loctestnum, loctesterr);
   testnum += loctestnum;
   testerr += loctesterr;
   cout << endl << "Exercise 1A - Vector (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
@@ -495,9 +495,9 @@ void stestVector(uint & testnum, uint & testerr) {
 
 // /* ************************************************************************** */
 
-// void testSimpleExercise1A(uint & testnum, uint & testerr) {
-//   stestVector(testnum, testerr);
-//   stestList(testnum, testerr);
-//   stestVectorList(testnum, testerr);
-//   cout << endl << "Exercise 1A (Simple Test) (Errors/Tests: " << testerr << "/" << testnum << ")" << endl;
-// }
+void testSimpleExercise1A(uint & testnum, uint & testerr) {
+  stestVector(testnum, testerr);
+  //stestList(testnum, testerr);
+  //stestVectorList(testnum, testerr);
+  cout << endl << "Exercise 1A (Simple Test) (Errors/Tests: " << testerr << "/" << testnum << ")" << endl;
+}

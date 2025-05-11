@@ -1,3 +1,4 @@
+
 #include <iostream>
 
 namespace lasd 
@@ -8,8 +9,18 @@ namespace lasd
 template <typename Data>
 Vector<Data>::Vector(const ulong newsize)
 {
-    size=newsize;
-    Elements=new Data[size]{};
+
+    try
+    {
+        size = newsize;
+        Elements=new Data[size]{};
+    }
+    catch(const std::exception& e)
+    {
+        size = 0;
+        Elements=nullptr;
+        std::cerr << e.what() << '\n';
+    }
 }
 
 template <typename Data>
@@ -61,9 +72,9 @@ Vector<Data>::Vector(Vector&& vec) noexcept
 template <typename Data>
 Vector<Data>& Vector<Data>::operator = (const Vector<Data>& vec)
 {
-    Vector<Data>* tempv = new Vector<Data>(vec);
-    std::swap(*tempv,*this);
-    delete tempv;
+    Vector<Data> temp(vec);      
+    std::swap(*this, temp);     
+    
     return *this;
 }
 
@@ -214,7 +225,7 @@ SortableVector<Data>& SortableVector<Data>::operator = (const SortableVector<Dat
 }
 
 template <typename Data>
-SortableVector<Data>& SortableVector<Data>::operator =(SortableVector<Data>&& vec) noexcept
+SortableVector<Data>& SortableVector<Data>::operator = (SortableVector<Data>&& vec) noexcept
 {
     Vector<Data>::operator=(std::move(vec));
     return *this;

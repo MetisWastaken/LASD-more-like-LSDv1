@@ -15,6 +15,7 @@ namespace lasd {
 
 template <typename Data>
 class DictionaryContainer: virtual public TestableContainer<Data>
+{
   // Must extend TestableContainer<Data>
 
 private:
@@ -124,7 +125,7 @@ public:
   void RemoveSuccessor(const Data&)=0; // (concrete function must throw std::length_error when not found)
 
 };
-
+}
 /* ************************************************************************** */
 
 

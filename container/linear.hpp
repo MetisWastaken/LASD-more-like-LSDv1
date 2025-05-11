@@ -43,7 +43,7 @@ public:
   /* ************************************************************************ */
 
   bool operator==(const LinearContainer&) const noexcept;
-  bool operator!=(const LinearContainer&) const noexcept; //ho da aggiungere qualcosa, ma non ho ben chiaro cosa
+  inline bool operator!=(const LinearContainer& con) const noexcept { return !(*this == con); }; //ho da aggiungere qualcosa, ma non ho ben chiaro cosa
 
 
   // Comparison operators
@@ -74,7 +74,7 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  inline void Traverse(TraverseFun) const override; // Override TraversableContainer member
+  inline void Traverse(TraverseFun fun) const override { PreOrderTraverse(fun); }; // Override TraversableContainer member
 
   /* ************************************************************************ */
 
@@ -153,9 +153,9 @@ public:
 
   // Specific member function (inherited from MappableContainer)
 
-   using typename MappableContainer<Data>::MapFun;
+  using typename MappableContainer<Data>::MapFun;
 
-   void Map (MapFun) override; // Override MappableContainer member
+  void Map (MapFun fun) override { PreOrderMap(fun); }; // Override MappableContainer member
 
   /* ************************************************************************ */
 
@@ -185,7 +185,7 @@ protected:
   using MutableLinearContainer<Data>::Front;
   using MutableLinearContainer<Data>::Back;
 
-  void Sort(ulong, ulong) noexcept;
+  void InsertionSort(ulong, ulong) noexcept;
 
 public:
 
