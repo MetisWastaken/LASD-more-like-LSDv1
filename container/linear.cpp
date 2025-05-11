@@ -18,7 +18,7 @@ inline void LinearContainer<Data>::PreOrderTraverse(TraverseFun fun) const {
 
 template<typename Data>
 inline void LinearContainer<Data>::PostOrderTraverse(TraverseFun fun) const {
-  for (ulong i = size - 1; i >= 0; i--) {
+  for (long i = static_cast<long>(size) - 1; i >= 0; i--) {
     fun(operator[](i));
   }
 }
@@ -32,7 +32,7 @@ inline void MutableLinearContainer<Data>::PreOrderMap(MapFun fun) {
 
 template<typename Data>
 inline void MutableLinearContainer<Data>::PostOrderMap(MapFun fun) {
-  for (long i = size- 1; i >= 0; i--) {
+  for (long i = static_cast<long>(size) - 1; i >= 0; i--) {
     fun(operator[](i));
   }
 }
