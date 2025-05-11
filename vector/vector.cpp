@@ -9,42 +9,36 @@ namespace lasd
 template <typename Data>
 Vector<Data>::Vector(const ulong newsize)
 {
-
-    try
-    {
+    try {
         size = newsize;
-        Elements=new Data[size]{};
-    }
-    catch(const std::exception& e)
-    {
+        Elements = new Data[size]{};
+    } catch(const std::exception& e) {
         size = 0;
-        Elements=nullptr;
+        Elements = nullptr;
         std::cerr << e.what() << '\n';
     }
 }
 
 template <typename Data>
-Vector<Data>::Vector(const TraversableContainer<Data>& con):Vector(con.Size())
+Vector<Data>::Vector(const TraversableContainer<Data>& cont)
+    : Vector(cont.Size())
 {
-    ulong i=0;
-    con.Traverse
-    (
-        [this,&i](const Data& dat)
-        {
-            Elements[i++]=dat;
+    ulong i = 0;
+    cont.Traverse(
+        [this, &i](const Data& data) {
+            Elements[i++] = data;
         }
     );
 }
 
 template <typename Data>
-Vector<Data>::Vector(MappableContainer<Data>&& con):Vector(con.Size())
+Vector<Data>::Vector(MappableContainer<Data>&& cont)
+    : Vector(cont.Size())
 {
-    ulong i=0;
-    con.Map
-    (
-        [this,&i](Data& dat)
-        {
-            Elements[i++]=std::move(dat);
+    ulong i = 0;
+    cont.Map(
+        [this, &i](Data& data) {
+            Elements[i++] = std::move(data);
         }
     );
 }
@@ -52,51 +46,50 @@ Vector<Data>::Vector(MappableContainer<Data>&& con):Vector(con.Size())
 /* ************************************************************************** */
 //copy constructor
 template <typename Data>
-Vector<Data>::Vector(const Vector& vec)
+Vector<Data>::Vector(const Vector& vect)
 {
-    size=vec.size;
-    Elements=new Data[size];
-    std::copy(vec.Elements,vec.Elements+size,Elements);
+    size = vect.size;
+    Elements = new Data[size];
+    std::copy(vect.Elements, vect.Elements + size, Elements);
 }
 
 //move constructor
 template <typename Data>
-Vector<Data>::Vector(Vector&& vec) noexcept
+Vector<Data>::Vector(Vector&& vect) noexcept
 {
-    std::swap(size,vec.size);
-    std::swap(Elements,vec.Elements);
+    std::swap(size, vect.size);
+    std::swap(Elements, vect.Elements);
 }
 
 /* ************************************************************************** */
 //copy assignment (Vector)
 template <typename Data>
-Vector<Data>& Vector<Data>::operator = (const Vector<Data>& vec)
+Vector<Data>& Vector<Data>::operator = (const Vector<Data>& vect)
 {
-    Vector<Data> temp(vec);      
-    std::swap(*this, temp);     
-    
+    Vector<Data> temp(vect);
+    std::swap(*this, temp);
     return *this;
 }
 
 //move assignment
 template <typename Data>
-Vector<Data>& Vector<Data>::operator = (Vector<Data>&& vec)noexcept
+Vector<Data>& Vector<Data>::operator = (Vector<Data>&& vect) noexcept
 {
-    std::swap(size,vec.size);
-    std::swap(Elements,vec.Elements);
+    std::swap(size, vect.size);
+    std::swap(Elements, vect.Elements);
     return *this;
 }
 
 /* ************************************************************************** */
 //comparison operators 
 template <typename Data>
-bool Vector<Data>::operator == (const Vector<Data>& vec)const noexcept
+bool Vector<Data>::operator == (const Vector<Data>& vect) const noexcept
 {
-    if(size==vec.size)
+    if(size == vect.size)
     {
-        for(ulong i=0;i<size;i++)
+        for(ulong i = 0; i < size; i++)
         {
-            if(Elements[i]!=vec.Elements[i])
+            if(Elements[i] != vect.Elements[i])
                 return false;
         }
         return true;
@@ -106,9 +99,9 @@ bool Vector<Data>::operator == (const Vector<Data>& vec)const noexcept
 
 
 template <typename Data>
-inline bool Vector<Data>::operator != (const Vector<Data>&vec)const noexcept
+inline bool Vector<Data>::operator != (const Vector<Data>& vect) const noexcept
 {
-    return !(*this==vec); 
+    return !(*this == vect);
 }
 
 /* ************************************************************************ */
@@ -117,28 +110,28 @@ inline bool Vector<Data>::operator != (const Vector<Data>&vec)const noexcept
 template <typename Data>
 Data& Vector<Data>::operator [] (const ulong i)
 {
-    if(i<size)
+    if(i < size)
         return Elements[i];
     else
-        throw std::out_of_range("Access at index "+ std::to_string(i)+ "; vector size"+ std::to_string(size));
+        throw std::out_of_range("Access at index " + std::to_string(i) + "; vector size" + std::to_string(size));
 }
 
 template <typename Data>
 Data& Vector<Data>::Front()
 {
-    if(size!=0)
+    if(size != 0)
         return Elements[0];
     else
-        throw std::length_error("Access to an empty vector.");
+        throw std::length_error("Access to empty vector.");
 }
 
 template <typename Data>
 Data& Vector<Data>::Back()
 {
-    if(size!=0)
+    if(size != 0)
         return Elements[size - 1];
     else
-        throw std::length_error("Access to an empty vector.");
+        throw std::length_error("Access to empty vector.");
 }
 
 
@@ -168,30 +161,26 @@ template <typename Data>
 void Vector<Data>::Clear()
 {
     delete[] Elements;
-    Elements=nullptr;
-    size=0;
+    Elements = nullptr;
+    size = 0;
 }
 
 template <typename Data>
 void Vector<Data>::Resize(const ulong newsize)
 {
-    if(newsize==0)
+    if(newsize == 0)
         Clear();
-
-    else if(size!=newsize)
+    else if(size != newsize)
     {
-        Data* temp = new Data [newsize] {};
-        ulong minsize = (size<newsize) ? size : newsize;
-
+        Data* temp = new Data[newsize] {};
+        ulong minsize = (size < newsize) ? size : newsize;
         for(ulong i = 0; i < minsize; i++)
         {
-            std::swap(Elements[i],temp[i]);
-        } 
-
-        std::swap(Elements,temp);
-        size=newsize;
-
-        delete[]temp;
+            std::swap(Elements[i], temp[i]);
+        }
+        std::swap(Elements, temp);
+        size = newsize;
+        delete[] temp;
     }
 }
 
@@ -199,35 +188,35 @@ void Vector<Data>::Resize(const ulong newsize)
 //specific constructor (SortableVector)
 
 template <typename Data>
-SortableVector<Data> :: SortableVector(const ulong newsize) : Vector<Data>(newsize) {}
+SortableVector<Data>::SortableVector(const ulong newsize) : Vector<Data>(newsize) {}
 
 template <typename Data>
-SortableVector<Data> :: SortableVector(const TraversableContainer<Data>& con) : Vector<Data>(con){}
+SortableVector<Data>::SortableVector(const TraversableContainer<Data>& cont) : Vector<Data>(cont) {}
 
 template <typename Data>
-SortableVector<Data> :: SortableVector (MappableContainer<Data>&& con) : Vector<Data>(std::move(con)) {}
+SortableVector<Data>::SortableVector(MappableContainer<Data>&& cont) : Vector<Data>(std::move(cont)) {}
 
 /* ************************************************************************** */
 // Copy Constructor and Move Constructor (SortableVector)
 template <typename Data>
-SortableVector<Data>:: SortableVector(const SortableVector<Data> & vec) : Vector<Data> (vec) {}
+SortableVector<Data>::SortableVector(const SortableVector<Data>& vect) : Vector<Data>(vect) {}
 
 template <typename Data>
-SortableVector<Data>:: SortableVector(SortableVector<Data> && vec) noexcept : Vector<Data> (std::move(vec)) {}
+SortableVector<Data>::SortableVector(SortableVector<Data>&& vect) noexcept : Vector<Data>(std::move(vect)) {}
 
 /* ************************************************************************** */
 //Copy Assignment and Move Assignment (SortableVector)
 template <typename Data>
-SortableVector<Data>& SortableVector<Data>::operator = (const SortableVector<Data> & vec) 
+SortableVector<Data>& SortableVector<Data>::operator = (const SortableVector<Data>& vect)
 {
-    Vector<Data>::operator=(vec);
+    Vector<Data>::operator=(vect);
     return *this;
 }
 
 template <typename Data>
-SortableVector<Data>& SortableVector<Data>::operator = (SortableVector<Data>&& vec) noexcept
+SortableVector<Data>& SortableVector<Data>::operator = (SortableVector<Data>&& vect) noexcept
 {
-    Vector<Data>::operator=(std::move(vec));
+    Vector<Data>::operator=(std::move(vect));
     return *this;
 }
 
