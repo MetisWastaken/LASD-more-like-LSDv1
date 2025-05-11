@@ -74,7 +74,7 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  void Traverse(TraverseFun) const override; // Override TraversableContainer member
+  inline void Traverse(TraverseFun) const override; // Override TraversableContainer member
 
   /* ************************************************************************ */
 
@@ -108,7 +108,11 @@ private:
 
 protected:
 
-  // ...
+using Container::size;
+using LinearContainer<Data>::operator[];
+using LinearContainer<Data>::Front;
+using LinearContainer<Data>::Back;
+
 
 public:
 
@@ -126,32 +130,23 @@ public:
   // type operator=(argument); // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
-  
-
-  
-  
+    
   // type operator[](argument) specifiers; // (mutable version; concrete function must throw std::out_of_range when out of range)
 
-  virtual const Data& operator[](ulong)const=0; 
   virtual Data& operator[](ulong) = 0;
 
-
-
   // type Front() specifiers; // (mutable version; concrete function must throw std::length_error when empty)
-
-  virtual const Data& Front() const { 
-     if (this->size == 0) throw std::length_error("Front: container is empty");
-      return (*this)[0]; 
-    } 
+  
+  virtual Data& Front() { 
+    if (this->size == 0) throw std::length_error("Front: container is empty");
+    return (*this)[0]; 
+  }
 
   // type Back() specifiers; // (mutable version; concrete function must throw std::length_error when empty)
-
-    virtual const Data& Back() const { 
-
+    virtual Data& Back() { 
       if (this->size == 0) throw std::length_error("Back: container is empty");
-
-      return (*this)[this->size-1]; //double check pls
-    } 
+      return (*this)[this->size-1]; 
+    }
 
 
   /* ************************************************************************ */
@@ -185,8 +180,12 @@ private:
   // ...
 
 protected:   
+  using Container::size;
+  using MutableLinearContainer<Data>::operator[];
+  using MutableLinearContainer<Data>::Front;
+  using MutableLinearContainer<Data>::Back;
 
- void Sort(ulong, ulong) noexcept;
+  void Sort(ulong, ulong) noexcept;
 
 public:
 

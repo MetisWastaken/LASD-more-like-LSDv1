@@ -1,6 +1,10 @@
+#include <iostream>
 
-namespace lasd {
+namespace lasd 
+{
+/* ************************************************************************ */
 
+// Specific constructors
 template <typename Data>
 Vector<Data>::Vector(const ulong newsize)
 {
@@ -215,4 +219,6 @@ SortableVector<Data>& SortableVector<Data>::operator =(SortableVector<Data>&& ve
     Vector<Data>::operator=(std::move(vec));
     return *this;
 }
+
+
 }

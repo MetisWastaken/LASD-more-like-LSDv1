@@ -14,14 +14,14 @@ inline Accumulator TraversableContainer <Data>::Fold(FoldFun<Accumulator> fun, A
 }
 
 template<typename Data>
-inline bool TraversableContainer <Data>::Exists(const Data& valore) const noexcept {
-    bool exists = false;
+bool TraversableContainer <Data>::Exists(const Data& valore) const noexcept {
+    bool Exists = false;
     Traverse(
-        [valore, &exists](const Data& data) {
-            exists |= (data == valore);
+        [valore, &Exists](const Data& data) {
+            Exists |= (data == valore);
         }
     );
-    return exists;
+    return Exists;
 }
 
 /* ************************************************************************** */

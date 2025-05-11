@@ -1,4 +1,3 @@
-
 #ifndef TRAVERSABLE_HPP
 #define TRAVERSABLE_HPP
 
@@ -41,7 +40,7 @@ public:
   Accumulator Fold(FoldFun<Accumulator>, Accumulator) const;
 
 
-  bool Exists(const Data&) const noexcept override;
+  virtual bool Exists(const Data&) const noexcept override;
 };
 
 /* ************************************************************************** */
@@ -52,11 +51,11 @@ class PreOrderTraversableContainer : virtual public TraversableContainer<Data> {
 public:
   ~PreOrderTraversableContainer() = default;
 
-  PreOrderTraversableContainer& operator=(const PreOrderTraversableContainer&) = delete;
-  PreOrderTraversableContainer& operator=(PreOrderTraversableContainer&&) noexcept = delete;
+  PreOrderTraversableContainer& operator=(const PreOrderTraversableContainer&)=delete;
+  PreOrderTraversableContainer& operator=(PreOrderTraversableContainer&&) noexcept=delete;
 
-  bool operator==(const PreOrderTraversableContainer&) const noexcept = delete;
-  bool operator!=(const PreOrderTraversableContainer&) const noexcept = delete;
+  bool operator==(const PreOrderTraversableContainer&) const noexcept=delete;
+  bool operator!=(const PreOrderTraversableContainer&) const noexcept=delete;
 
   using typename TraversableContainer<Data>::TraverseFun;
 
@@ -95,6 +94,7 @@ public:
   
   using FoldFun = typename TraversableContainer<Data>::FoldFun<Accumulator>;
   virtual void PreOrderTraverse(TraverseFun) const = 0;
+  virtual void PostOrderTraverse(TraverseFun) const = 0;
 
   template <typename Accumulator>
   Accumulator PostOrderFold(FoldFun<Accumulator>, Accumulator) const;

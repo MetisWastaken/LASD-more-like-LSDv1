@@ -12,7 +12,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class Vector: virtual public MutableLinearContainer<Data>, public ResizableContainer<Data> {
+class Vector: virtual public MutableLinearContainer <Data>, virtual public ResizableContainer{
   // Must extend ,
   //             ResizableContainer
 
@@ -57,7 +57,7 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  Vector& operator=(const Vector&)
+  Vector& operator=(const Vector&);
 
   // Move assignment
   Vector& operator=(Vector&&)noexcept;
@@ -68,7 +68,7 @@ public:
   // type operator==(argument) specifiers;
   bool operator==(const Vector&)const noexcept;
   // type operator!=(argument) specifiers;
-  inline bool operator!=(const Vector&)const noexcept;
+  inline bool operator!=(const Vector& ) const noexcept;
 
   /* ************************************************************************ */
 
@@ -82,38 +82,47 @@ public:
 
   // type Back() specifiers; // Override MutableLinearContainer member (must throw std::length_error when empty)
    Data& Back() override;
+   
   /* ************************************************************************ */
 
   // Specific member functions (inherited from LinearContainer)
   const Data& operator[](const ulong)const override;
+
   // type operator[](argument) specifiers; // Override LinearContainer member (must throw std::out_of_range when out of range)
 
   // type Front() specifiers; // Override LinearContainer member (must throw std::length_error when empty)
+
   const Data& Front()const override;
+
   
   // type Back() specifiers; // Override LinearContainer member (must throw std::length_error when empty)
   const Data& Back()const override;
+
   /* ************************************************************************ */
 
   // Specific member function (inherited from ResizableContainer)
   // type Resize(argument) specifiers; // Override ResizableContainer member
 
   void Resize(const ulong)override; 
+
   /* ************************************************************************ */
 
   // Specific member function (inherited from ClearableContainer)
   // type Clear() specifiers; // Override ClearableContainer member
 
+  void Clear() override;
+
 protected:
 
   // Auxiliary functions, if necessary!
+
 
 };
 
 /* ************************************************************************** */
 
 template <typename Data>
-class SortableVector: public Vector<Data>, public SortableLinearContainer<Data> {
+class SortableVector:virtual public Vector<Data>, virtual public SortableLinearContainer<Data> {
   // Must extend Vector<Data>,
   //             SortableLinearContainer<Data>
 
@@ -123,8 +132,8 @@ private:
 
 protected:
 
-  using Container::size;
-  Data* Elements = nullptr;
+  using Vector<Data>::size;
+  Data*Elements = nullptr;
 
   // ...
 
@@ -146,7 +155,7 @@ public:
   SortableVector(const SortableVector&);
 
   // Move constructor
-  SortableVector(const SortableVector&&);
+  SortableVector(SortableVector&&) noexcept;
 
   /* ************************************************************************ */
 
