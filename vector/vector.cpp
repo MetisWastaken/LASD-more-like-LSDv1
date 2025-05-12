@@ -11,10 +11,10 @@ Vector<Data>::Vector(const ulong newsize)
 {
     try {
         size = newsize;
-        Elements = new Data[size]{};
+        arrayElements = new Data[size]{};
     } catch(const std::exception& e) {
         size = 0;
-        Elements = nullptr;
+        arrayElements = nullptr;
         std::cerr << e.what() << '\n';
     }
 }
@@ -26,7 +26,7 @@ Vector<Data>::Vector(const TraversableContainer<Data>& cont)
     ulong i = 0;
     cont.Traverse(
         [this, &i](const Data& data) {
-            Elements[i++] = data;
+            arrayElements[i++] = data;
         }
     );
 }
@@ -38,7 +38,7 @@ Vector<Data>::Vector(MappableContainer<Data>&& cont)
     ulong i = 0;
     cont.Map(
         [this, &i](Data& data) {
-            Elements[i++] = std::move(data);
+            arrayElements[i++] = std::move(data);
         }
     );
 }
@@ -49,8 +49,8 @@ template <typename Data>
 Vector<Data>::Vector(const Vector& vect)
 {
     size = vect.size;
-    Elements = new Data[size];
-    std::copy(vect.Elements, vect.Elements + size, Elements);
+    arrayElements = new Data[size];
+    std::copy(vect.arrayElements, vect.arrayElements + size, arrayElements);
 }
 
 //move constructor
@@ -58,7 +58,7 @@ template <typename Data>
 Vector<Data>::Vector(Vector&& vect) noexcept
 {
     std::swap(size, vect.size);
-    std::swap(Elements, vect.Elements);
+    std::swap(arrayElements, vect.arrayElements);
 }
 
 /* ************************************************************************** */
@@ -76,7 +76,7 @@ template <typename Data>
 Vector<Data>& Vector<Data>::operator = (Vector<Data>&& vect) noexcept
 {
     std::swap(size, vect.size);
-    std::swap(Elements, vect.Elements);
+    std::swap(arrayElements, vect.arrayElements);
     return *this;
 }
 
@@ -89,7 +89,7 @@ bool Vector<Data>::operator == (const Vector<Data>& vect) const noexcept
     {
         for(ulong i = 0; i < size; i++)
         {
-            if(Elements[i] != vect.Elements[i])
+            if(arrayElements[i] != vect.arrayElements[i])
                 return false;
         }
         return true;
@@ -111,7 +111,7 @@ template <typename Data>
 Data& Vector<Data>::operator [] (const ulong i)
 {
     if(i < size)
-        return Elements[i];
+        return arrayElements[i];
     else
         throw std::out_of_range("Access at index " + std::to_string(i) + "; vector size" + std::to_string(size));
 }
@@ -120,7 +120,7 @@ template <typename Data>
 Data& Vector<Data>::Front()
 {
     if(size != 0)
-        return Elements[0];
+        return arrayElements[0];
     else
         throw std::length_error("Access to empty vector.");
 }
@@ -129,7 +129,7 @@ template <typename Data>
 Data& Vector<Data>::Back()
 {
     if(size != 0)
-        return Elements[size - 1];
+        return arrayElements[size - 1];
     else
         throw std::length_error("Access to empty vector.");
 }
@@ -160,8 +160,8 @@ const Data& Vector<Data>::Back() const
 template <typename Data>
 void Vector<Data>::Clear()
 {
-    delete[] Elements;
-    Elements = nullptr;
+    delete[] arrayElements;
+    arrayElements = nullptr;
     size = 0;
 }
 
@@ -176,9 +176,9 @@ void Vector<Data>::Resize(const ulong newsize)
         ulong minsize = (size < newsize) ? size : newsize;
         for(ulong i = 0; i < minsize; i++)
         {
-            std::swap(Elements[i], temp[i]);
+            std::swap(arrayElements[i], temp[i]);
         }
-        std::swap(Elements, temp);
+        std::swap(arrayElements, temp);
         size = newsize;
         delete[] temp;
     }
@@ -207,14 +207,14 @@ SortableVector<Data>::SortableVector(SortableVector<Data>&& vect) noexcept : Vec
 /* ************************************************************************** */
 //Copy Assignment and Move Assignment (SortableVector)
 template <typename Data>
-SortableVector<Data>& SortableVector<Data>::operator = (const SortableVector<Data>& vect)
+SortableVector<Data>& SortableVector<Data>::operator=(const SortableVector<Data>& vect)
 {
     Vector<Data>::operator=(vect);
     return *this;
 }
 
 template <typename Data>
-SortableVector<Data>& SortableVector<Data>::operator = (SortableVector<Data>&& vect) noexcept
+SortableVector<Data>& SortableVector<Data>::operator=(SortableVector<Data>&& vect) noexcept
 {
     Vector<Data>::operator=(std::move(vect));
     return *this;
