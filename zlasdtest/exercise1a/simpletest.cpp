@@ -172,332 +172,332 @@ void stestVector(uint & testnum, uint & testerr) {
 
 /* ************************************************************************** */
 
-// Commento i test non relativi a vector
-// void stestListInt(uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   cout << endl << "Begin of List<int> Test:" << endl;
-//   try {
-//     lasd::List<int> lst;
-//     Empty(loctestnum, loctesterr, lst, true);
-//     Size(loctestnum, loctesterr, lst, true, 0);
 
-//     GetFront(loctestnum, loctesterr, lst, false, 0);
-//     GetBack(loctestnum, loctesterr, lst, false, 0);
+void stestListInt(uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of List<int> Test:" << endl;
+  try {
+    lasd::List<int> lst;
+    Empty(loctestnum, loctesterr, lst, true);
+    Size(loctestnum, loctesterr, lst, true, 0);
 
-//     Exists(loctestnum, loctesterr, lst, false, 0);
+    GetFront(loctestnum, loctesterr, lst, false, 0);
+    GetBack(loctestnum, loctesterr, lst, false, 0);
 
-//     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
-//     TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
-//     FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 0);
-//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 0);
+    Exists(loctestnum, loctesterr, lst, false, 0);
 
-//     RemoveFromFront(loctestnum, loctesterr, lst, false);
-//     FrontNRemove(loctestnum, loctesterr, lst, false, 0);
+    TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
+    TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
+    FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 0);
+    FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 0);
 
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 4);
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 5);
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 9);
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 2);
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 1);
+    RemoveFromFront(loctestnum, loctesterr, lst, false);
+    FrontNRemove(loctestnum, loctesterr, lst, false, 0);
 
-//     GetFront(loctestnum, loctesterr, lst, true, 1);
-//     GetBack(loctestnum, loctesterr, lst, true, 2);
-//     SetFront(loctestnum, loctesterr, lst, true, 2);
-//     SetBack(loctestnum, loctesterr, lst, true, 6);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 4);
+    InsertAtFront(loctestnum, loctesterr, lst, true, 5);
+    InsertAtFront(loctestnum, loctesterr, lst, true, 9);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 2);
+    InsertAtFront(loctestnum, loctesterr, lst, true, 1);
 
-//     GetAt(loctestnum, loctesterr, lst, true, 3, 4);
-//     SetAt(loctestnum, loctesterr, lst, true, 3, 3);
+    GetFront(loctestnum, loctesterr, lst, true, 1);
+    GetBack(loctestnum, loctesterr, lst, true, 2);
+    SetFront(loctestnum, loctesterr, lst, true, 2);
+    SetBack(loctestnum, loctesterr, lst, true, 6);
 
-//     Exists(loctestnum, loctesterr, lst, false, 4);
+    GetAt(loctestnum, loctesterr, lst, true, 3, 4);
+    SetAt(loctestnum, loctesterr, lst, true, 3, 3);
 
-//     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
-//     TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
-//     FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 25);
-//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldMultiply<int>, 1, 1620);
+    Exists(loctestnum, loctesterr, lst, false, 4);
 
-//     RemoveFromFront(loctestnum, loctesterr, lst, true);
-//     FrontNRemove(loctestnum, loctesterr, lst, true, 9);
-//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldMultiply<int>, 1, 90);
+    TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
+    TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
+    FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 25);
+    FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldMultiply<int>, 1, 1620);
 
-//     lasd::List<int> coplst(lst);
-//     EqualList(loctestnum, loctesterr, lst, coplst, true);
-//     MapPreOrder(loctestnum, loctesterr, lst, true, &MapIncrement<int>);
-//     NonEqualList(loctestnum, loctesterr, lst, coplst, true);
+    RemoveFromFront(loctestnum, loctesterr, lst, true);
+    FrontNRemove(loctestnum, loctesterr, lst, true, 9);
+    FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldMultiply<int>, 1, 90);
 
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 0);
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 0);
-//     NonEqualList(loctestnum, loctesterr, lst, coplst, true);
-//     coplst = lst;
-//     EqualList(loctestnum, loctesterr, lst, coplst, true);
+    lasd::List<int> coplst(lst);
+    EqualList(loctestnum, loctesterr, lst, coplst, true);
+    MapPreOrder(loctestnum, loctesterr, lst, true, &MapIncrement<int>);
+    NonEqualList(loctestnum, loctesterr, lst, coplst, true);
 
-//     RemoveFromFront(loctestnum, loctesterr, coplst, true);
-//     FrontNRemove(loctestnum, loctesterr, coplst, true, 6);
-//     coplst = move(lst);
-//     FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 11);
-//     FoldPreOrder(loctestnum, loctesterr, coplst, true, &FoldAdd<int>, 0, 17);
+    InsertAtFront(loctestnum, loctesterr, lst, true, 0);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 0);
+    NonEqualList(loctestnum, loctesterr, lst, coplst, true);
+    coplst = lst;
+    EqualList(loctestnum, loctesterr, lst, coplst, true);
 
-//     lasd::List<int> movlst(move(lst));
-//     MapPreOrder(loctestnum, loctesterr, movlst, true, &MapIncrement<int>);
-//     FoldPreOrder(loctestnum, loctesterr, movlst, true, &FoldAdd<int>, 0, 14);
+    RemoveFromFront(loctestnum, loctesterr, coplst, true);
+    FrontNRemove(loctestnum, loctesterr, coplst, true, 6);
+    coplst = move(lst);
+    FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 11);
+    FoldPreOrder(loctestnum, loctesterr, coplst, true, &FoldAdd<int>, 0, 17);
 
-//     InsertAtFront(loctestnum, loctesterr, movlst, true, 6);
-//     InsertAtBack(loctestnum, loctesterr, movlst, true, 8);
-//     RemoveFromFront(loctestnum, loctesterr, movlst, true);
-//     InsertAtBack(loctestnum, loctesterr, movlst, true, 7);
-//     FoldPreOrder(loctestnum, loctesterr, movlst, true, &FoldAdd<int>, 1, 30);
+    lasd::List<int> movlst(move(lst));
+    MapPreOrder(loctestnum, loctesterr, movlst, true, &MapIncrement<int>);
+    FoldPreOrder(loctestnum, loctesterr, movlst, true, &FoldAdd<int>, 0, 14);
 
-//     movlst.Clear();
-//     Empty(loctestnum, loctesterr, movlst, true);
-//     Size(loctestnum, loctesterr, movlst, true, 0);
-//   }
-//   catch (...) {
-//     loctestnum++; loctesterr++;
-//     cout << endl << "Unmanaged error! " << endl;
-//   }
-//   cout << "End of List<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-// }
+    InsertAtFront(loctestnum, loctesterr, movlst, true, 6);
+    InsertAtBack(loctestnum, loctesterr, movlst, true, 8);
+    RemoveFromFront(loctestnum, loctesterr, movlst, true);
+    InsertAtBack(loctestnum, loctesterr, movlst, true, 7);
+    FoldPreOrder(loctestnum, loctesterr, movlst, true, &FoldAdd<int>, 1, 30);
 
-// void stestListDouble(uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   cout << endl << "Begin of List<double> Test:" << endl;
-//   try {
-//     lasd::List<double> lst;
-//     Empty(loctestnum, loctesterr, lst, true);
-//     Size(loctestnum, loctesterr, lst, true, 0);
+    movlst.Clear();
+    Empty(loctestnum, loctesterr, movlst, true);
+    Size(loctestnum, loctesterr, movlst, true, 0);
+  }
+  catch (...) {
+    loctestnum++; loctesterr++;
+    cout << endl << "Unmanaged error! " << endl;
+  }
+  cout << "End of List<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  testnum += loctestnum;
+  testerr += loctesterr;
+}
 
-//     InsertAtBack(loctestnum, loctesterr, lst, true, -2.5);
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 2.5);
+void stestListDouble(uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of List<double> Test:" << endl;
+  try {
+    lasd::List<double> lst;
+    Empty(loctestnum, loctesterr, lst, true);
+    Size(loctestnum, loctesterr, lst, true, 0);
 
-//     lst.Clear();
+    InsertAtBack(loctestnum, loctesterr, lst, true, -2.5);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 2.5);
 
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 0.5);
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 3.3);
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 5.5);
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 1.1);
+    lst.Clear();
 
-//     GetFront(loctestnum, loctesterr, lst, true, 5.5);
-//     GetBack(loctestnum, loctesterr, lst, true, 1.1);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 0.5);
+    InsertAtFront(loctestnum, loctesterr, lst, true, 3.3);
+    InsertAtFront(loctestnum, loctesterr, lst, true, 5.5);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 1.1);
 
-//     Exists(loctestnum, loctesterr, lst, false, 0.0);
+    GetFront(loctestnum, loctesterr, lst, true, 5.5);
+    GetBack(loctestnum, loctesterr, lst, true, 1.1);
 
-//     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
-//     TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
-//     FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<double>, 0.0, 10.4);
-//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldMultiply<double>, 1.0, 9.9825);
-//   }
-//   catch (...) {
-//     loctestnum++; loctesterr++;
-//     cout << endl << "Unmanaged error! " << endl;
-//   }
-//   cout << "End of List<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-// }
+    Exists(loctestnum, loctesterr, lst, false, 0.0);
 
-// void stestListString(uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   cout << endl << "Begin of List<string> Test:" << endl;
-//   try {
-//     lasd::List<string> lst;
-//     Empty(loctestnum, loctesterr, lst, true);
-//     Size(loctestnum, loctesterr, lst, true, 0);
+    TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
+    TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
+    FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<double>, 0.0, 10.4);
+    FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldMultiply<double>, 1.0, 9.9825);
+  }
+  catch (...) {
+    loctestnum++; loctesterr++;
+    cout << endl << "Unmanaged error! " << endl;
+  }
+  cout << "End of List<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  testnum += loctestnum;
+  testerr += loctesterr;
+}
 
-//     InsertAtFront(loctestnum, loctesterr, lst, true, string("A"));
-//     InsertAtBack(loctestnum, loctesterr, lst, true, string("B"));
+void stestListString(uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of List<string> Test:" << endl;
+  try {
+    lasd::List<string> lst;
+    Empty(loctestnum, loctesterr, lst, true);
+    Size(loctestnum, loctesterr, lst, true, 0);
 
-//     GetFront(loctestnum, loctesterr, lst, true, string("A"));
-//     GetBack(loctestnum, loctesterr, lst, true, string("B"));
+    InsertAtFront(loctestnum, loctesterr, lst, true, string("A"));
+    InsertAtBack(loctestnum, loctesterr, lst, true, string("B"));
 
-//     Exists(loctestnum, loctesterr, lst, true, string("B"));
+    GetFront(loctestnum, loctesterr, lst, true, string("A"));
+    GetBack(loctestnum, loctesterr, lst, true, string("B"));
 
-//     MapPreOrder(loctestnum, loctesterr, lst, true, [](string & str) { MapStringAppend(str, string(" ")); });
-//     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<string>);
-//     FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldStringConcatenate, string("X"), string("XA B "));
-//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldStringConcatenate, string("X"), string("XB A "));
+    Exists(loctestnum, loctesterr, lst, true, string("B"));
 
-//     Exists(loctestnum, loctesterr, lst, false, string("B"));
+    MapPreOrder(loctestnum, loctesterr, lst, true, [](string & str) { MapStringAppend(str, string(" ")); });
+    TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<string>);
+    FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldStringConcatenate, string("X"), string("XA B "));
+    FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldStringConcatenate, string("X"), string("XB A "));
 
-//     lasd::List<string> coplst(lst);
-//     EqualList(loctestnum, loctesterr, lst, coplst, true);
-//     RemoveFromFront(loctestnum, loctesterr, coplst, true);
-//     NonEqualList(loctestnum, loctesterr, lst, coplst, true);
+    Exists(loctestnum, loctesterr, lst, false, string("B"));
 
-//     lst = coplst;
-//     EqualList(loctestnum, loctesterr, lst, coplst, true);
-//     InsertAtBack(loctestnum, loctesterr, lst, true, string("A"));
-//     InsertAtFront(loctestnum, loctesterr, lst, true, string("C"));
-//     NonEqualList(loctestnum, loctesterr, lst, coplst, true);
+    lasd::List<string> coplst(lst);
+    EqualList(loctestnum, loctesterr, lst, coplst, true);
+    RemoveFromFront(loctestnum, loctesterr, coplst, true);
+    NonEqualList(loctestnum, loctesterr, lst, coplst, true);
 
-//     coplst = move(lst);
-//     FoldPreOrder(loctestnum, loctesterr, coplst, true, &FoldStringConcatenate, string("?"), string("?CB A"));
-//   }
-//   catch (...) {
-//     loctestnum++; loctesterr++;
-//     cout << endl << "Unmanaged error! " << endl;
-//   }
-//   cout << "End of List<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-// }
+    lst = coplst;
+    EqualList(loctestnum, loctesterr, lst, coplst, true);
+    InsertAtBack(loctestnum, loctesterr, lst, true, string("A"));
+    InsertAtFront(loctestnum, loctesterr, lst, true, string("C"));
+    NonEqualList(loctestnum, loctesterr, lst, coplst, true);
 
-// void stestList(uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   stestListInt(loctestnum, loctesterr);
-//   stestListDouble(loctestnum, loctesterr);
-//   stestListString(loctestnum, loctesterr);
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-//   cout << endl << "Exercise 1A - List (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-// }
+    coplst = move(lst);
+    FoldPreOrder(loctestnum, loctesterr, coplst, true, &FoldStringConcatenate, string("?"), string("?CB A"));
+  }
+  catch (...) {
+    loctestnum++; loctesterr++;
+    cout << endl << "Unmanaged error! " << endl;
+  }
+  cout << "End of List<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  testnum += loctestnum;
+  testerr += loctesterr;
+}
 
-// /* ************************************************************************** */
+void stestList(uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  stestListInt(loctestnum, loctesterr);
+  stestListDouble(loctestnum, loctesterr);
+  stestListString(loctestnum, loctesterr);
+  testnum += loctestnum;
+  testerr += loctesterr;
+  cout << endl << "Exercise 1A - List (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+}
 
-// void stestVectorListInt(uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   cout << endl << "Begin of Vector/List<int> Test:" << endl;
-//   try {
-//     lasd::SortableVector<int> vec(3);
-//     SetAt(loctestnum, loctesterr, vec, true, 0, -1);
-//     SetAt(loctestnum, loctesterr, vec, true, 1, 0);
-//     SetAt(loctestnum, loctesterr, vec, true, 2, 1);
+/* ************************************************************************** */
 
-//     lasd::List<int> lst;
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 1);
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 0);
-//     InsertAtFront(loctestnum, loctesterr, lst, true, -1);
+void stestVectorListInt(uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of Vector/List<int> Test:" << endl;
+  try {
+    lasd::SortableVector<int> vec(3);
+    SetAt(loctestnum, loctesterr, vec, true, 0, -1);
+    SetAt(loctestnum, loctesterr, vec, true, 1, 0);
+    SetAt(loctestnum, loctesterr, vec, true, 2, 1);
 
-//     EqualLinear(loctestnum, loctesterr, vec, lst, true);
+    lasd::List<int> lst;
+    InsertAtFront(loctestnum, loctesterr, lst, true, 1);
+    InsertAtFront(loctestnum, loctesterr, lst, true, 0);
+    InsertAtFront(loctestnum, loctesterr, lst, true, -1);
 
-//     lasd::SortableVector<int> copvec(lst);
-//     EqualVector(loctestnum, loctesterr, vec, copvec, true);
-//     lasd::SortableVector<int> copvecx(vec);
-//     EqualVector(loctestnum, loctesterr, copvecx, copvec, true);
+    EqualLinear(loctestnum, loctesterr, vec, lst, true);
 
-//     lasd::List<int> coplst(vec);
-//     EqualList(loctestnum, loctesterr, lst, coplst, true);
-//     lasd::List<int> coplstx(lst);
-//     EqualList(loctestnum, loctesterr, coplstx, coplst, true);
-//   }
-//   catch (...) {
-//     loctestnum++; loctesterr++;
-//     cout << endl << "Unmanaged error! " << endl;
-//   }
-//   cout << "End of Vector/List<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-// }
+    lasd::SortableVector<int> copvec(lst);
+    EqualVector(loctestnum, loctesterr, vec, copvec, true);
+    lasd::SortableVector<int> copvecx(vec);
+    EqualVector(loctestnum, loctesterr, copvecx, copvec, true);
 
-// void stestVectorListDouble(uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   cout << endl << "Begin of Vector/List<double> Test:" << endl;
-//   try {
-//     lasd::SortableVector<double> vec(3);
-//     SetAt(loctestnum, loctesterr, vec, true, 0, -0.5);
-//     SetAt(loctestnum, loctesterr, vec, true, 1, 0.0);
-//     SetAt(loctestnum, loctesterr, vec, true, 2, 0.5);
+    lasd::List<int> coplst(vec);
+    EqualList(loctestnum, loctesterr, lst, coplst, true);
+    lasd::List<int> coplstx(lst);
+    EqualList(loctestnum, loctesterr, coplstx, coplst, true);
+  }
+  catch (...) {
+    loctestnum++; loctesterr++;
+    cout << endl << "Unmanaged error! " << endl;
+  }
+  cout << "End of Vector/List<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  testnum += loctestnum;
+  testerr += loctesterr;
+}
 
-//     lasd::List<double> lst;
-//     InsertAtBack(loctestnum, loctesterr, lst, true, -0.5);
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 0.0);
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 0.5);
+void stestVectorListDouble(uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of Vector/List<double> Test:" << endl;
+  try {
+    lasd::SortableVector<double> vec(3);
+    SetAt(loctestnum, loctesterr, vec, true, 0, -0.5);
+    SetAt(loctestnum, loctesterr, vec, true, 1, 0.0);
+    SetAt(loctestnum, loctesterr, vec, true, 2, 0.5);
 
-//     EqualLinear(loctestnum, loctesterr, vec, lst, true);
+    lasd::List<double> lst;
+    InsertAtBack(loctestnum, loctesterr, lst, true, -0.5);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 0.0);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 0.5);
 
-//     lasd::SortableVector<double> copvec(lst);
-//     EqualVector(loctestnum, loctesterr, vec, copvec, true);
-//     lasd::SortableVector<double> copvecx(vec);
-//     EqualVector(loctestnum, loctesterr, copvecx, copvec, true);
+    EqualLinear(loctestnum, loctesterr, vec, lst, true);
 
-//     lasd::List<double> coplst(vec);
-//     EqualList(loctestnum, loctesterr, lst, coplst, true);
-//     lasd::List<double> coplstx(lst);
-//     EqualList(loctestnum, loctesterr, coplstx, coplst, true);
-//   }
-//   catch (...) {
-//     loctestnum++; loctesterr++;
-//     cout << endl << "Unmanaged error! " << endl;
-//   }
-//   cout << "End of Vector/List<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-// }
+    lasd::SortableVector<double> copvec(lst);
+    EqualVector(loctestnum, loctesterr, vec, copvec, true);
+    lasd::SortableVector<double> copvecx(vec);
+    EqualVector(loctestnum, loctesterr, copvecx, copvec, true);
 
-// void stestVectorListString(uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   cout << endl << "Begin of Vector/List<string> Test:" << endl;
-//   try {
-//     lasd::SortableVector<string> vec(3);
-//     SetAt(loctestnum, loctesterr, vec, true, 0, string("A"));
-//     SetAt(loctestnum, loctesterr, vec, true, 1, string("B"));
-//     SetAt(loctestnum, loctesterr, vec, true, 2, string("C"));
+    lasd::List<double> coplst(vec);
+    EqualList(loctestnum, loctesterr, lst, coplst, true);
+    lasd::List<double> coplstx(lst);
+    EqualList(loctestnum, loctesterr, coplstx, coplst, true);
+  }
+  catch (...) {
+    loctestnum++; loctesterr++;
+    cout << endl << "Unmanaged error! " << endl;
+  }
+  cout << "End of Vector/List<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  testnum += loctestnum;
+  testerr += loctesterr;
+}
 
-//     lasd::List<string> lst;
-//     InsertAtFront(loctestnum, loctesterr, lst, true, string("B"));
-//     InsertAtBack(loctestnum, loctesterr, lst, true, string("C"));
-//     InsertAtFront(loctestnum, loctesterr, lst, true, string("A"));
+void stestVectorListString(uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of Vector/List<string> Test:" << endl;
+  try {
+    lasd::SortableVector<string> vec(3);
+    SetAt(loctestnum, loctesterr, vec, true, 0, string("A"));
+    SetAt(loctestnum, loctesterr, vec, true, 1, string("B"));
+    SetAt(loctestnum, loctesterr, vec, true, 2, string("C"));
 
-//     EqualLinear(loctestnum, loctesterr, vec, lst, true);
+    lasd::List<string> lst;
+    InsertAtFront(loctestnum, loctesterr, lst, true, string("B"));
+    InsertAtBack(loctestnum, loctesterr, lst, true, string("C"));
+    InsertAtFront(loctestnum, loctesterr, lst, true, string("A"));
 
-//     lasd::SortableVector<string> copvec(lst);
-//     EqualVector(loctestnum, loctesterr, vec, copvec, true);
-//     lasd::SortableVector<string> copvecx(vec);
-//     EqualVector(loctestnum, loctesterr, copvecx, copvec, true);
+    EqualLinear(loctestnum, loctesterr, vec, lst, true);
 
-//     lasd::List<string> coplst(vec);
-//     EqualList(loctestnum, loctesterr, lst, coplst, true);
-//     lasd::List<string> coplstx(lst);
-//     EqualList(loctestnum, loctesterr, coplstx, coplst, true);
+    lasd::SortableVector<string> copvec(lst);
+    EqualVector(loctestnum, loctesterr, vec, copvec, true);
+    lasd::SortableVector<string> copvecx(vec);
+    EqualVector(loctestnum, loctesterr, copvecx, copvec, true);
 
-//     Size(loctestnum, loctesterr, vec, true, 3);
-//     TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
-//     Size(loctestnum, loctesterr, copvec, true, 3);
-//     TraversePreOrder(loctestnum, loctesterr, copvec, true, &TraversePrint<string>);
+    lasd::List<string> coplst(vec);
+    EqualList(loctestnum, loctesterr, lst, coplst, true);
+    lasd::List<string> coplstx(lst);
+    EqualList(loctestnum, loctesterr, coplstx, coplst, true);
 
-//     lasd::List<string> coplsty(move(vec));
-//     EqualList(loctestnum, loctesterr, coplst, coplsty, true);
-//     Size(loctestnum, loctesterr, vec, true, 3);
-//     TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
-//     TraversePreOrder(loctestnum, loctesterr, copvec, true, &TraversePrint<string>);
-//     EqualVector(loctestnum, loctesterr, vec, copvec, false);
+    Size(loctestnum, loctesterr, vec, true, 3);
+    TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
+    Size(loctestnum, loctesterr, copvec, true, 3);
+    TraversePreOrder(loctestnum, loctesterr, copvec, true, &TraversePrint<string>);
 
-//     Size(loctestnum, loctesterr, lst, true, 3);
-//     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<string>);
-//     Size(loctestnum, loctesterr, coplst, true, 3);
-//     TraversePreOrder(loctestnum, loctesterr, coplst, true, &TraversePrint<string>);
+    lasd::List<string> coplsty(move(vec));
+    EqualList(loctestnum, loctesterr, coplst, coplsty, true);
+    Size(loctestnum, loctesterr, vec, true, 3);
+    TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
+    TraversePreOrder(loctestnum, loctesterr, copvec, true, &TraversePrint<string>);
+    EqualVector(loctestnum, loctesterr, vec, copvec, false);
 
-//     lasd::SortableVector<string> copvecy(move(lst));
-//     EqualVector(loctestnum, loctesterr, copvec, copvecy, true);
-//     Size(loctestnum, loctesterr, lst, true, 3);
-//     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<string>);
-//     TraversePreOrder(loctestnum, loctesterr, coplst, true, &TraversePrint<string>);
-//     EqualList(loctestnum, loctesterr, lst, coplst, false);
-//   }
-//   catch (...) {
-//     loctestnum++; loctesterr++;
-//     cout << endl << "Unmanaged error! " << endl;
-//   }
-//   cout << "End of Vector/List<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-// }
+    Size(loctestnum, loctesterr, lst, true, 3);
+    TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<string>);
+    Size(loctestnum, loctesterr, coplst, true, 3);
+    TraversePreOrder(loctestnum, loctesterr, coplst, true, &TraversePrint<string>);
 
-// void stestVectorList(uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   stestVectorListInt(loctestnum, loctesterr);
-//   stestVectorListDouble(loctestnum, loctesterr);
-//   stestVectorListString(loctestnum, loctesterr);
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-//   cout << endl << "Exercise 1A - Vector/List (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-// }
+    lasd::SortableVector<string> copvecy(move(lst));
+    EqualVector(loctestnum, loctesterr, copvec, copvecy, true);
+    Size(loctestnum, loctesterr, lst, true, 3);
+    TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<string>);
+    TraversePreOrder(loctestnum, loctesterr, coplst, true, &TraversePrint<string>);
+    EqualList(loctestnum, loctesterr, lst, coplst, false);
+  }
+  catch (...) {
+    loctestnum++; loctesterr++;
+    cout << endl << "Unmanaged error! " << endl;
+  }
+  cout << "End of Vector/List<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  testnum += loctestnum;
+  testerr += loctesterr;
+}
 
-// /* ************************************************************************** */
+void stestVectorList(uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  stestVectorListInt(loctestnum, loctesterr);
+  stestVectorListDouble(loctestnum, loctesterr);
+  stestVectorListString(loctestnum, loctesterr);
+  testnum += loctestnum;
+  testerr += loctesterr;
+  cout << endl << "Exercise 1A - Vector/List (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+}
+
+/* ************************************************************************** */
 
 void testSimpleExercise1A(uint & testnum, uint & testerr) {
   stestVector(testnum, testerr);
-  //stestList(testnum, testerr);
-  //stestVectorList(testnum, testerr);
+  stestList(testnum, testerr);
+  stestVectorList(testnum, testerr);
   cout << endl << "Exercise 1A (Simple Test) (Errors/Tests: " << testerr << "/" << testnum << ")" << endl;
 }

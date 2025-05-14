@@ -1,6 +1,4 @@
 
-#include <iostream>
-
 namespace lasd 
 {
 /* ************************************************************************ */
@@ -20,9 +18,7 @@ Vector<Data>::Vector(const ulong newsize)
 }
 
 template <typename Data>
-Vector<Data>::Vector(const TraversableContainer<Data>& cont)
-    : Vector(cont.Size())
-{
+Vector<Data>::Vector(const TraversableContainer<Data>& cont): Vector(cont.Size()){
     ulong i = 0;
     cont.Traverse(
         [this, &i](const Data& data) {
