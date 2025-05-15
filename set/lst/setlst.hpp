@@ -37,8 +37,9 @@ public:
   /* ************************************************************************ */
 
   // Specific constructors
-  inline SetLst() //rivedere
-
+  
+  SetLst(const TraversableContainer<Data>& con); // A set obtained from a TraversableContainer
+  SetLst(MappableContainer<Data>&& con); // A set obtained from a MappableContainer
   /* ************************************************************************ */
 
   // Copy constructor
