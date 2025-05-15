@@ -1,12 +1,10 @@
 
-namespace lasd 
-{
+namespace lasd {
 /* ************************************************************************ */
 
 // Specific constructors
 template <typename Data>
-Vector<Data>::Vector(const ulong newsize)
-{
+Vector<Data>::Vector(const ulong newsize){
     try {
         size = newsize;
         arrayElements = new Data[size]{};
@@ -28,9 +26,7 @@ Vector<Data>::Vector(const TraversableContainer<Data>& cont): Vector(cont.Size()
 }
 
 template <typename Data>
-Vector<Data>::Vector(MappableContainer<Data>&& cont)
-    : Vector(cont.Size())
-{
+Vector<Data>::Vector(MappableContainer<Data>&& cont):Vector(cont.Size()){
     ulong i = 0;
     cont.Map(
         [this, &i](Data& data) {
@@ -42,8 +38,7 @@ Vector<Data>::Vector(MappableContainer<Data>&& cont)
 /* ************************************************************************** */
 //copy constructor
 template <typename Data>
-Vector<Data>::Vector(const Vector& vect)
-{
+Vector<Data>::Vector(const Vector& vect){
     size = vect.size;
     arrayElements = new Data[size];
     std::copy(vect.arrayElements, vect.arrayElements + size, arrayElements);
@@ -51,8 +46,7 @@ Vector<Data>::Vector(const Vector& vect)
 
 //move constructor
 template <typename Data>
-Vector<Data>::Vector(Vector&& vect) noexcept
-{
+Vector<Data>::Vector(Vector&& vect) noexcept{
     std::swap(size, vect.size);
     std::swap(arrayElements, vect.arrayElements);
 }
@@ -60,8 +54,7 @@ Vector<Data>::Vector(Vector&& vect) noexcept
 /* ************************************************************************** */
 //copy assignment (Vector)
 template <typename Data>
-Vector<Data>& Vector<Data>::operator = (const Vector<Data>& vect)
-{
+Vector<Data>& Vector<Data>::operator=(const Vector<Data>& vect){
     Vector<Data> temp(vect);
     std::swap(*this, temp);
     return *this;
@@ -69,8 +62,7 @@ Vector<Data>& Vector<Data>::operator = (const Vector<Data>& vect)
 
 //move assignment
 template <typename Data>
-Vector<Data>& Vector<Data>::operator = (Vector<Data>&& vect) noexcept
-{
+Vector<Data>& Vector<Data>::operator=(Vector<Data>&& vect) noexcept{
     std::swap(size, vect.size);
     std::swap(arrayElements, vect.arrayElements);
     return *this;
@@ -79,13 +71,12 @@ Vector<Data>& Vector<Data>::operator = (Vector<Data>&& vect) noexcept
 /* ************************************************************************** */
 //comparison operators 
 template <typename Data>
-bool Vector<Data>::operator == (const Vector<Data>& vect) const noexcept
-{
+bool Vector<Data>::operator==(const Vector<Data>& vect) const noexcept{
     if(size == vect.size)
     {
-        for(ulong i = 0; i < size; i++)
+        for(ulong i=0; i<size; i++)
         {
-            if(arrayElements[i] != vect.arrayElements[i])
+            if(arrayElements[i]!=vect.arrayElements[i])
                 return false;
         }
         return true;
@@ -95,8 +86,7 @@ bool Vector<Data>::operator == (const Vector<Data>& vect) const noexcept
 
 
 template <typename Data>
-inline bool Vector<Data>::operator != (const Vector<Data>& vect) const noexcept
-{
+inline bool Vector<Data>::operator != (const Vector<Data>& vect) const noexcept{
     return !(*this == vect);
 }
 
@@ -104,8 +94,7 @@ inline bool Vector<Data>::operator != (const Vector<Data>& vect) const noexcept
 
 // Specific member functions (inherited from MutableLinearContainer)
 template <typename Data>
-Data& Vector<Data>::operator [] (const ulong i)
-{
+Data& Vector<Data>::operator [] (const ulong i){
     if(i < size)
         return arrayElements[i];
     else
@@ -113,8 +102,7 @@ Data& Vector<Data>::operator [] (const ulong i)
 }
 
 template <typename Data>
-Data& Vector<Data>::Front()
-{
+Data& Vector<Data>::Front(){
     if(size != 0)
         return arrayElements[0];
     else
@@ -169,9 +157,13 @@ void Vector<Data>::Resize(const ulong newsize)
     else if(size != newsize)
     {
         Data* temp = new Data[newsize] {};
-        ulong minsize = (size < newsize) ? size : newsize;
-        for(ulong i = 0; i < minsize; i++)
-        {
+        ulong minsize;
+        if (size < newsize) {
+            minsize = size;
+        } else {
+            minsize = newsize;
+        }
+        for(ulong i = 0; i < minsize; i++){
             std::swap(arrayElements[i], temp[i]);
         }
         std::swap(arrayElements, temp);

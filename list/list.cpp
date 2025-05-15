@@ -1,29 +1,22 @@
 
 namespace lasd {
 
-    // Specific constructors (Node)
     template <typename Data>
     List<Data>::Node::Node(Data&& data)noexcept{
         std::swap(element,data);
     }
 
-    //move constructor (Node)
     template <typename Data>
     List<Data>::Node::Node(Node&& node)noexcept{
         std::swap(element,node.element);
         std::swap(next,node.next);
     }
 
-
-
-    // Destructor (Node)
     template <typename Data>
     List<Data>::Node::~Node(){
         delete next;
     }
 
-
-    // Comparison operators
     template <typename Data>
     bool List<Data>::Node::operator==(const Node& node) const noexcept{
         return (element == node.element) && 
@@ -36,8 +29,6 @@ namespace lasd {
         return !(*this == node); 
     }
 
-
-    // Specific constructor
     template <typename Data>
     List <Data>::List(const TraversableContainer<Data>& con){
         con.Traverse(
@@ -56,7 +47,6 @@ namespace lasd {
         );
     }
 
-    // Copy constructor
     template <typename Data>
     List<Data>::List(const List<Data>& list){
         if (list.head != nullptr){
@@ -80,7 +70,6 @@ namespace lasd {
         }
     }
 
-    // Move constructor
     template <typename Data>
     List<Data>::List(List<Data>&& lst)noexcept {
         if(lst.tail!=nullptr) {
@@ -91,7 +80,6 @@ namespace lasd {
     }
 
 
-    // Destructor
     template <typename Data>
     List<Data>::~List(){
         delete head;
@@ -99,8 +87,6 @@ namespace lasd {
         size = 0;
     }
 
-/* ************************************************************************** */
-    // Copy assignment
     template <typename Data>
     List<Data>& List<Data>::operator=(const List<Data>& new_list) {
         if (this != &new_list) // no self-assignment
@@ -116,7 +102,7 @@ namespace lasd {
         return *this;
     }
 
-    //Move assignment
+    
     template <typename Data>
     List<Data>& List<Data>::operator = (List<Data> && list) noexcept {
         std::swap(size, list.size);
@@ -126,10 +112,6 @@ namespace lasd {
         return *this;
     }
 
-
-
-
-    // Comparison operators
     template <typename Data>
     bool List<Data>::operator==(const List<Data>& list) const noexcept {
         if (size != list.size)
@@ -155,8 +137,6 @@ namespace lasd {
     }
 
 
-
-    // Specific functions
     template <typename Data>
     void List<Data>::InsertAtFront(const Data& data){
         Node* temp = new Node(data);
@@ -296,8 +276,6 @@ namespace lasd {
         return val;
     }
 
-/* ************************************************************************** */
-    // Specific member functions
     template <typename Data>
     Data& List<Data>::operator[](const ulong index){
         if (index >= size){
@@ -328,8 +306,6 @@ namespace lasd {
             throw std::length_error("Access to empty list");
     }
 
-/* ************************************************************************** */
-    // Specific member functions 
     template <typename Data>
     const Data& List<Data>::operator[](const ulong index) const{
         return static_cast<const Data&>(const_cast<List<Data>*>(this)->operator[](index));
@@ -345,21 +321,17 @@ namespace lasd {
         return static_cast<const Data&>(const_cast<List<Data>*>(this)->Back());
     }
 
-/* ************************************************************************** */
-    // Specific member function 
+
     template <typename Data>
     void List<Data>::Traverse(TraverseFun fun) const{
         PreOrderTraverse(fun, head);
     }
     
-    // Specific member function 
 
     template <typename Data>
     void List<Data>::PreOrderTraverse(TraverseFun fun) const {
         PreOrderTraverse(fun, head);
     }
-
-    // Specific member function
 
     template <typename Data>
     void List<Data>::PostOrderTraverse(TraverseFun fun) const {
@@ -367,15 +339,11 @@ namespace lasd {
     }
 
 
-/* ************************************************************************** */
-    // Specific member function 
     template <typename Data>
     void List<Data>::Map(MapFun fun) {
         PreOrderMap(fun, head);
     }
 
-
-    // Specific member function
 
     template <typename Data>
     void List<Data>::PreOrderMap(MapFun fun) {
@@ -383,15 +351,11 @@ namespace lasd {
     }
 
 
-    // Specific member function
-
     template <typename Data>
     void List<Data>::PostOrderMap(MapFun fun) {
         PostOrderMap(fun, head);
     }
-/* ************************************************************************** */
 
-    // Specific member function 
     template <typename Data>
     void List<Data>::Clear(){
         delete head;
