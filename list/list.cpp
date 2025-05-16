@@ -1,4 +1,3 @@
-
 namespace lasd {
 
     template <typename Data>
@@ -402,4 +401,3 @@ namespace lasd {
     }
 
 }
-

@@ -10,7 +10,7 @@ libexc = $(libcon) zlasdtest/container/container.hpp zlasdtest/container/testabl
 
 libexc1a = $(libexc) vector/vector.hpp vector/vector.cpp list/list.hpp list/list.cpp
 
-#libexc1b = $(libexc1a) set/set.hpp set/lst/setlst.hpp set/lst/setlst.cpp set/vec/setvec.hpp set/vec/setvec.cpp
+libexc1b = $(libexc1a) set/set.hpp set/lst/setlst.hpp set/lst/setlst.cpp set/vec/setvec.hpp set/vec/setvec.cpp
 
 main: $(objects)
 	$(cc) $(cflags) $(objects) -o main

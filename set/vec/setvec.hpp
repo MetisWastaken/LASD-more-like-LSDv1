@@ -20,13 +20,15 @@ class SetVec: public Set<Data>, public ResizableContainer {
 
 private:
 
+  Vector<Data> elements;
+
   // ...
 
 protected:
 
-using Container::Insert;
-using Container::Remove;
-using Container::Clear;
+using DictionaryContainer<Data>::Insert;
+using DictionaryContainer<Data>::Remove;
+using ClearableContainer::Clear;
 
   // ...
 
@@ -72,26 +74,26 @@ public:
 
   // Specific member functions (inherited from OrderedDictionaryContainer)
 
-  virtual const Data& Min() const = 0;
-  virtual Data MinNRemove() = 0;
-  virtual void RemoveMin() = 0;
-  virtual const Data& Max() const = 0;
-  virtual Data MaxNRemove() = 0;
-  virtual void RemoveMax() = 0;
-  virtual const Data& Predecessor(const Data&) const = 0;
-  virtual Data PredecessorNRemove(const Data&) = 0;
-  virtual void RemovePredecessor(const Data&) = 0;
-  virtual const Data& Successor(const Data&) const = 0;
-  virtual Data SuccessorNRemove(const Data&) = 0;
-  virtual void RemoveSuccessor(const Data&) = 0;
+  virtual const Data& Min() const;
+  virtual Data MinNRemove();
+  virtual void RemoveMin();
+  virtual const Data& Max() const;
+  virtual Data MaxNRemove();
+  virtual void RemoveMax();
+  virtual const Data& Predecessor(const Data&) const;
+  virtual Data PredecessorNRemove(const Data&);
+  virtual void RemovePredecessor(const Data&);
+  virtual const Data& Successor(const Data&) const;
+  virtual Data SuccessorNRemove(const Data&);
+  virtual void RemoveSuccessor(const Data&);
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from DictionaryContainer)
 
-  virtual void Insert(const Data&) override; // Override DictionaryContainer member (copy of the value)
-  virtual void Insert(Data&&) override; // Override DictionaryContainer member (move of the value)
-  virtual void Remove(const Data&) override; // Override DictionaryContainer member
+  virtual bool Insert(const Data&) override; // Override DictionaryContainer member (copy of the value)
+  virtual bool Insert(Data&&) override; // Override DictionaryContainer member (move of the value)
+  virtual bool Remove(const Data&) override; // Override DictionaryContainer member
 
   /* ************************************************************************ */
 

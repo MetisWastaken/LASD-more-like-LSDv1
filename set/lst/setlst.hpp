@@ -23,16 +23,18 @@ private:
   // ...
 
 protected:
+  using typename List<Data>::Node;
+  using List<Data>::tail;
+  using List<Data>::head;
+  using Container::size;
 
-  using Container::Clear;
-  using Container::Resize;
 
   // ...
 
 public:
 
   // Default constructor
-  virtual SetLst() = default;
+   SetLst() = default;
 
   /* ************************************************************************ */
 
@@ -41,25 +43,25 @@ public:
   SetLst(const TraversableContainer<Data>& con); // A set obtained from a TraversableContainer
   SetLst(MappableContainer<Data>&& con); // A set obtained from a MappableContainer
   /* ************************************************************************ */
-
   // Copy constructor
-  SetLst(const SetLst& set):Set<Data>(set), List<Data>(set);
+
+  SetLst(const SetLst& set);
 
   // Move constructor
-  SetLst(SetLst&& set) noexcept:Set<Data>(std::move(set)), List<Data>(std::move(set));
+  SetLst(SetLst&& set) noexcept;
 
   /* ************************************************************************ */
 
   // Destructor
-  virtual ~SetLst();
+  virtual ~SetLst()=default;
 
   /* ************************************************************************ */
 
   // Copy assignment
-  bool operator=(const SetLst& set); // Copy assignment of abstract types is not possible.
+  SetLst& operator=(const SetLst& set); // Copy assignment of abstract types is not possible.
 
   // Move assignment
-  bool operator=(SetLst&& set) noexcept; // Move assignment of abstract types is not possible.
+  SetLst& operator=(SetLst&& set) noexcept; // Move assignment of abstract types is not possible.
 
   /* ************************************************************************ */
 
@@ -69,39 +71,26 @@ public:
 
   /* ************************************************************************ */
 
-  virtual const Data& Min() const = 0;
-  virtual Data MinNRemove() = 0;
-  virtual void RemoveMin() = 0;
+  virtual const Data& Min() const override;
+  virtual Data MinNRemove() override;
+  virtual void RemoveMin() override;
 
-  virtual const Data& Max() const = 0;
-  virtual Data MaxNRemove() = 0;
-  void RemoveMax() = 0;
+  virtual const Data& Max() const override;
+  virtual Data MaxNRemove() override;
+  virtual void RemoveMax() override;
 
-  virtual const Data& Predecessor(const Data&) const = 0;
-  virtual Data PredecessorNRemove(const Data&) = 0;
-  virtual void RemovePredecessor(const Data&) = 0;
+  virtual const Data& Predecessor(const Data&) const override;
+  virtual Data PredecessorNRemove(const Data&) override;
+  virtual void RemovePredecessor(const Data&) override;
 
-  virtual const Data& Successor(const Data&) const = 0;
-  virtual Data SuccessorNRemove(const Data&) = 0;
-  virtual void RemoveSuccessor(const Data&) = 0;
+  virtual const Data& Successor(const Data&) const override;
+  virtual Data SuccessorNRemove(const Data&) override;
+  virtual void RemoveSuccessor(const Data&) override;
 
-  // Specific member functions // Specific member functions (inherited from OrderedDictionaryContainer)
-
-  // type Min(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when empty)
-  // type MinNRemove(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when empty)
-  // type RemoveMin(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when empty)
-
-  // type Max(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when empty)
-  // type MaxNRemove(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when empty)
-  // type RemoveMax(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when empty)
-
-  // type Predecessor(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when not found)
-  // type PredecessorNRemove(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when not found)
-  // type RemovePredecessor(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when not found)
-
-  // type Successor(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when not found)
-  // type SuccessorNRemove(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when not found)
-  // type RemoveSuccessor(argument) specifiers; // Override OrderedDictionaryContainer member (concrete function must throw std::length_error when not found)
+  // These functions are inherited from OrderedDictionaryContainer
+  // All are pure virtual and must be implemented by derived classes
+  // Min/Max functions must throw std::length_error when empty
+  // Predecessor/Successor functions must throw std::length_error when element not found
 
 
                                                      
@@ -109,9 +98,9 @@ public:
 
   // Specific member functions (inherited from DictionaryContainer)
 
-    virtual void Insert(const Data&) override; // Override DictionaryContainer member (copy of the value)
-    virtual void Insert(Data&&) override; // Override DictionaryContainer member (move of the value)
-    virtual void Remove(const Data&) override; // Override DictionaryContainer member
+    bool Insert(const Data&) override; // Override DictionaryContainer member (copy of the value)
+    bool Insert(Data&&) override; // Override DictionaryContainer member (move of the value)
+    virtual bool Remove(const Data&) override; // Override DictionaryContainer member
 
 
   /* ************************************************************************ */

@@ -54,9 +54,9 @@ public:
 
   // Specific member functions
 
-  virtual void Insert(const Data&)=0; // Copy of the value
-  virtual void Insert(Data&&)=0; // Move of the value
-  virtual void Remove(const Data&)=0;
+  virtual bool Insert(const Data&)=0; // Copy of the value
+  virtual bool Insert(Data&&)=0; // Move of the value
+  virtual bool Remove(const Data&)=0;
 
   bool InsertAll(const TraversableContainer<Data>&); // Copy of the value; From TraversableContainer; True if all are inserted
   bool InsertAll(MappableContainer<Data>&&); // Move of the value; From MappableContainer; True if all are inserted
@@ -113,13 +113,13 @@ public:
 
   virtual const Data& Max()const=0; // (concrete function must throw std::length_error when empty)
   virtual Data MaxNRemove()=0; // (concrete function must throw std::length_error when empty)
-  void RemoveMax()=0; // (concrete function must throw std::length_error when empty)
+  virtual void RemoveMax()=0; // (concrete function must throw std::length_error when empty)
 
   virtual const Data& Predecessor(const Data&)const=0; // (concrete function must throw std::length_error when not found)
   virtual Data PredecessorNRemove(const Data&)=0; // (concrete function must throw std::length_error when not found)
   virtual void RemovePredecessor(const Data&)=0; // (concrete function must throw std::length_error when not found)
 
-  virtual const Successor(const Data&)const=0; // (concrete function must throw std::length_error when not found)
+  virtual const Data& Successor(const Data&)const=0; // (concrete function must throw std::length_error when not found)
   virtual Data SuccessorNRemove(const Data&)=0; // (concrete function must throw std::length_error when not found)
   virtual void RemoveSuccessor(const Data&)=0; // (concrete function must throw std::length_error when not found)
 
