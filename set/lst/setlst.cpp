@@ -1,9 +1,5 @@
-
-
 namespace lasd {
 
-
-// Copy constructor
 template <typename Data>
 SetLst<Data>::SetLst(const SetLst<Data>& set) : List<Data>() {
     set.Traverse([this](const Data& data) {
@@ -11,7 +7,7 @@ SetLst<Data>::SetLst(const SetLst<Data>& set) : List<Data>() {
     });
 }
 
-// Move constructor
+
 template <typename Data>
 SetLst<Data>::SetLst(SetLst<Data>&& set) noexcept : List<Data>() {
     std::swap(this->head, set.head);
@@ -44,7 +40,7 @@ SetLst<Data>& SetLst<Data>::operator=(const SetLst<Data>& set) {
         set.Traverse([this](const Data& data) {
             Insert(data);
         });
-       
+
     }
     return *this;
 }
@@ -74,30 +70,31 @@ bool SetLst<Data>::operator!=(const SetLst<Data>& set) const noexcept {
 template <typename Data>
 bool SetLst<Data>::Insert(Data&& data) {
 
-    if(Exists(data)){
+    if (BinarySearch(data) != nullptr) {
         return false;
     }
-    if (data>tail->element || size == 0) {
+    if (size == 0 || data > tail->element) {
         List<Data>::InsertAtBack(std::move(data));
         return true;
     }
-    if(data<head->element) {
+    if (data < head->element) {
         List<Data>::InsertAtFront(std::move(data));
+        return true;
     }
-    Node*temp=head;
-    while(temp->next!=nullptr && temp->next->element<data){
-        temp=temp->next; // 1 2 3 4 9 11 67
-
+    Node* temp = head;
+    while (temp->next != nullptr && temp->next->element < data) {
+        temp = temp->next;
     }
-    Node*newNode= new Node(std::move(data));
-    newNode->next=temp->next;
-    temp->next=newNode;
+    Node* newNode = new Node(std::move(data));
+    newNode->next = temp->next;
+    temp->next = newNode;
+    ++size;
     return true;
 }
 
 template <typename Data>
 bool SetLst<Data>::Insert(const Data& data) {
-    if (Exists(data)) {
+    if (BinarySearch(data) != nullptr) {
         return false;
     }
     if (size == 0 || data > tail->element) {
@@ -115,19 +112,38 @@ bool SetLst<Data>::Insert(const Data& data) {
     Node* newNode = new Node(data);
     newNode->next = temp->next;
     temp->next = newNode;
+    ++size;
     return true;
 }
 
 template <typename Data>
 bool SetLst<Data>::Remove(const Data& data) {
-    if(data==tail->element){
+    const Data* found = BinarySearch(data);
+    if (!found) {
+        return false;
+    }
+    if (data == tail->element) {
         List<Data>::RemoveFromBack();
         return true;
-    };
-    if(data==head->element){
+    }
+    if (data == head->element) {
         List<Data>::RemoveFromFront();
         return true;
-    };
+    }
+    Node* temp = head;
+    while (temp->next != nullptr && !(temp->next->element == data)) {
+        temp = temp->next;
+    }
+    if (temp->next != nullptr) {
+        Node* toDelete = temp->next;
+        temp->next = toDelete->next;
+        delete toDelete;
+        --size;
+        if (temp->next == nullptr) {
+            tail = temp;
+        }
+        return true;
+    }
     return false;
 }
 
@@ -138,14 +154,14 @@ const Data& SetLst<Data>::operator[](ulong index) const {
 
 template <typename Data>
 bool SetLst<Data>::Exists(const Data& data) const noexcept {
-   return List<Data>::Exists(data);
+    return (BinarySearch(data) != nullptr);
 }
 
 template <typename Data>
 void SetLst<Data>::Clear() {
     List<Data>::Clear();
 }
-// --- OrderedDictionaryContainer methods implementation ---
+
 template <typename Data>
 const Data& SetLst<Data>::Min() const {
     if (this->size == 0) throw std::length_error("Set is empty");
@@ -234,6 +250,28 @@ template <typename Data>
 void SetLst<Data>::RemoveSuccessor(const Data& data) {
     const Data& succ = Successor(data);
     this->Remove(succ);
+}
+
+template <typename Data>
+const Data* SetLst<Data>::BinarySearch(const Data& value) const {
+    if (this->size == 0) return nullptr;
+    long left = 0;
+    long right = this->size - 1;
+    while (left <= right) {
+        long mid = left + (right - left) / 2;
+        Node* curr = this->head;
+        for (long i = 0; i < mid; ++i) {
+            curr = curr->next;
+        }
+        if (curr->element == value) {
+            return &(curr->element);
+        } else if (curr->element < value) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return nullptr;
 }
 }
 

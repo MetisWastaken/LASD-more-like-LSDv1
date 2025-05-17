@@ -237,8 +237,8 @@ void stestSetInt(uint & testnum, uint & testerr) {
 
     /* ********************************************************************** */
 
-    // EqualLinear(loctestnum, loctesterr, setvec3, setlst2, true);
-    // NonEqualLinear(loctestnum, loctesterr, setlst3, setvec2, false);
+    //EqualLinear(loctestnum, loctesterr, setvec3, setlst2, true);
+    //NonEqualLinear(loctestnum, loctesterr, setlst3, setvec2, false);
 
   }
   catch (...) {
@@ -250,19 +250,19 @@ void stestSetInt(uint & testnum, uint & testerr) {
   testerr += loctesterr;
 }
 
-// void stestSetFloat(uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   cout << endl << "Begin of Set<double> Test" << endl;
-//   try {
-//     lasd::List<double> lst;
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 4.0);
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 0.4);
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 1.2);
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 2.1);
-//     InsertAtFront(loctestnum, loctesterr, lst, true, 3.5);
-//     InsertAtBack(loctestnum, loctesterr, lst, true, 5.3);
+void stestSetFloat(uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of Set<double> Test" << endl;
+  try {
+    lasd::List<double> lst;
+    InsertAtFront(loctestnum, loctesterr, lst, true, 4.0);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 0.4);
+    InsertAtFront(loctestnum, loctesterr, lst, true, 1.2);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 2.1);
+    InsertAtFront(loctestnum, loctesterr, lst, true, 3.5);
+    InsertAtBack(loctestnum, loctesterr, lst, true, 5.3);
 
-//     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
+    TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
 
 //     /* ********************************************************************** */
 
@@ -302,71 +302,71 @@ void stestSetInt(uint & testnum, uint & testerr) {
 
 //     /* ********************************************************************** */
 
-//     lasd::SetLst<double> setlst1(lst);
+    lasd::SetLst<double> setlst1(lst);
 
-//     Empty(loctestnum, loctesterr, setlst1, false);
-//     Size(loctestnum, loctesterr, setlst1, true, 6);
+    Empty(loctestnum, loctesterr, setlst1, false);
+    Size(loctestnum, loctesterr, setlst1, true, 6);
 
-//     TraversePreOrder(loctestnum, loctesterr, setlst1, true, &TraversePrint<double>);
-//     TraversePostOrder(loctestnum, loctesterr, setlst1, true, &TraversePrint<double>);
+    TraversePreOrder(loctestnum, loctesterr, setlst1, true, &TraversePrint<double>);
+    TraversePostOrder(loctestnum, loctesterr, setlst1, true, &TraversePrint<double>);
 
-//     lasd::SetLst<double> setlst2;
+    lasd::SetLst<double> setlst2;
 
-//     InsertC(loctestnum, loctesterr, setlst2, true, 2.1);
-//     InsertC(loctestnum, loctesterr, setlst2, true, 0.4);
-//     InsertC(loctestnum, loctesterr, setlst2, true, 1.2);
-//     InsertC(loctestnum, loctesterr, setlst2, true, 3.5);
-//     InsertC(loctestnum, loctesterr, setlst2, true, 5.3);
-//     InsertC(loctestnum, loctesterr, setlst2, true, 4.0);
+    InsertC(loctestnum, loctesterr, setlst2, true, 2.1);
+    InsertC(loctestnum, loctesterr, setlst2, true, 0.4);
+    InsertC(loctestnum, loctesterr, setlst2, true, 1.2);
+    InsertC(loctestnum, loctesterr, setlst2, true, 3.5);
+    InsertC(loctestnum, loctesterr, setlst2, true, 5.3);
+    InsertC(loctestnum, loctesterr, setlst2, true, 4.0);
 
 
-//     EqualSetLst(loctestnum, loctesterr, setlst1, setlst2, true);
-//     NonEqualSetLst(loctestnum, loctesterr, setlst1, setlst2, false);
+    EqualSetLst(loctestnum, loctesterr, setlst1, setlst2, true);
+    NonEqualSetLst(loctestnum, loctesterr, setlst1, setlst2, false);
 
-//     setlst1.Clear();
-//     setlst2.Clear();
+    setlst1.Clear();
+    setlst2.Clear();
 
-//     InsertC(loctestnum, loctesterr, setlst1, true, 0.2);
-//     InsertC(loctestnum, loctesterr, setlst1, true, 1.1);
-//     InsertC(loctestnum, loctesterr, setlst1, true, 2.1);
+    InsertC(loctestnum, loctesterr, setlst1, true, 0.2);
+    InsertC(loctestnum, loctesterr, setlst1, true, 1.1);
+    InsertC(loctestnum, loctesterr, setlst1, true, 2.1);
 
-//     InsertC(loctestnum, loctesterr, setlst2, true, 2.1);
-//     InsertC(loctestnum, loctesterr, setlst2, true, 1.1);
-//     InsertC(loctestnum, loctesterr, setlst2, true, 0.2);
+    InsertC(loctestnum, loctesterr, setlst2, true, 2.1);
+    InsertC(loctestnum, loctesterr, setlst2, true, 1.1);
+    InsertC(loctestnum, loctesterr, setlst2, true, 0.2);
 
-//     EqualSetLst(loctestnum, loctesterr, setlst1, setlst2, true);
-//     NonEqualSetLst(loctestnum, loctesterr, setlst1, setlst2, false);
+    EqualSetLst(loctestnum, loctesterr, setlst1, setlst2, true);
+    NonEqualSetLst(loctestnum, loctesterr, setlst1, setlst2, false);
 
 //     /* ********************************************************************** */
 
 //     EqualLinear(loctestnum, loctesterr, setvec1, setlst2, true);
 //     NonEqualLinear(loctestnum, loctesterr, setlst2, setvec2, false);
 
-//   }
-//   catch (...) {
-//     loctestnum++; loctesterr++;
-//     cout << endl << "Unmanaged error! " << endl;
-//   }
-//   cout << "End of Set<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-// }
+  }
+  catch (...) {
+    loctestnum++; loctesterr++;
+    cout << endl << "Unmanaged error! " << endl;
+  }
+  cout << "End of Set<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  testnum += loctestnum;
+  testerr += loctesterr;
+}
 
-// void stestSetString(lasd::Set<string> & set, uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   try {
-//     TraversePreOrder(loctestnum, loctesterr, set, true, &TraversePrint<string>);
-//     FoldPreOrder(loctestnum, loctesterr, set, true, &FoldStringConcatenate, string("?"), string("?ABCDE"));
-//     FoldPostOrder(loctestnum, loctesterr, set, true, &FoldStringConcatenate, string("?"), string("?EDCBA"));
-//   }
-//   catch (...) {
-//     loctestnum++; loctesterr++;
-//     cout << endl << "Unmanaged error! " << endl;
-//   }
-//   cout << "End of Set<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-// }
+void stestSetString(lasd::Set<string> & set, uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  try {
+    TraversePreOrder(loctestnum, loctesterr, set, true, &TraversePrint<string>);
+    FoldPreOrder(loctestnum, loctesterr, set, true, &FoldStringConcatenate, string("?"), string("?ABCDE"));
+    FoldPostOrder(loctestnum, loctesterr, set, true, &FoldStringConcatenate, string("?"), string("?EDCBA"));
+  }
+  catch (...) {
+    loctestnum++; loctesterr++;
+    cout << endl << "Unmanaged error! " << endl;
+  }
+  cout << "End of Set<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  testnum += loctestnum;
+  testerr += loctesterr;
+}
 
 // void stestSetString(uint & testnum, uint & testerr) {
 //   uint loctestnum = 0, loctesterr = 0;
@@ -394,10 +394,10 @@ void stestSetInt(uint & testnum, uint & testerr) {
 //     EqualLinear(loctestnum, loctesterr, setvec, setlst, true);
 
 //   }
-//   catch (...) {
-//     loctestnum++; loctesterr++;
-//     cout << endl << "Unmanaged error! " << endl;
-//   }
+  // catch (...) {
+  //   loctestnum++; loctesterr++;
+  //   cout << endl << "Unmanaged error! " << endl;
+  // }
 //   cout << "End of Set<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
 //   testnum += loctestnum;
 //   testerr += loctesterr;
