@@ -20,22 +20,26 @@ class SetVec: public Set<Data>, public ResizableContainer {
 
 private:
 
-  Vector<Data> elements;
-
   // ...
 
 protected:
 
-using DictionaryContainer<Data>::Insert;
-using DictionaryContainer<Data>::Remove;
-using ClearableContainer::Clear;
+ Vector<Data> elements;
+ ulong tail=0;
+ ulong head=0;
+ using Container::size;
 
-  // ...
+ulong BinarySearch(const Data&)const;
+
+void Expand(ulong);
+void Reduce(ulong);
+
+void ChangeCapacity();
 
 public:
 
   // Default constructor
-  inline SetVec()=default;
+  inline SetVec();
 
   /* ************************************************************************ */
 
@@ -54,7 +58,9 @@ public:
   /* ************************************************************************ */
 
   // Destructor
-  virtual ~SetVec();
+  virtual ~SetVec(){
+    Clear();
+  }
 
   /* ************************************************************************ */
 
@@ -114,8 +120,6 @@ public:
   virtual void Clear() override; // Override ClearableContainer member
 
 protected:
-
-  // Auxiliary functions, if necessary!
 
 };
 

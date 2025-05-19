@@ -1,3 +1,4 @@
+
 #include <iostream>
 
 /* ************************************************************************** */
@@ -131,9 +132,9 @@ void stestSetInt(uint & testnum, uint & testerr) {
 
     /* ********************************************************************** */
 
-    // cout << endl << "Begin of SetVec<int> Test:" << endl;
-    // lasd::SetVec<int> setvec(vec);
-    // stestSetInt(setvec, loctestnum, loctesterr);
+    cout << endl << "Begin of SetVec<int> Test:" << endl;
+    lasd::SetVec<int> setvec(vec);
+    stestSetInt(setvec, loctestnum, loctesterr);
     cout << endl << "Begin of SetLst<int> Test:" << endl;
     lasd::SetLst<int> setlst(vec);
     stestSetInt(setlst, loctestnum, loctesterr);
@@ -141,51 +142,51 @@ void stestSetInt(uint & testnum, uint & testerr) {
 
     /* ********************************************************************** */
 
-    //setvec.InsertAll(vec);
-    // lasd::SetVec<int> setvec1(setvec);
+    setvec.InsertAll(vec);
+    lasd::SetVec<int> setvec1(setvec);
 
-    // EqualSetVec(loctestnum, loctesterr, setvec, setvec1, true);
+    EqualSetVec(loctestnum, loctesterr, setvec, setvec1, true);
 
-    // Remove(loctestnum, loctesterr, setvec1, true, 4);
+    Remove(loctestnum, loctesterr, setvec1, true, 4);
 
-    // NonEqualSetVec(loctestnum, loctesterr, setvec, setvec1, true);
+    NonEqualSetVec(loctestnum, loctesterr, setvec, setvec1, true);
 
-    // InsertC(loctestnum, loctesterr, setvec1, true, 4);
+    InsertC(loctestnum, loctesterr, setvec1, true, 4);
 
-    // EqualSetVec(loctestnum, loctesterr, setvec, setvec1, true);
+    EqualSetVec(loctestnum, loctesterr, setvec, setvec1, true);
 
-    // lasd::SetVec<int> setvec2 = setvec1;
+    lasd::SetVec<int> setvec2 = setvec1;
 
-    // EqualSetVec(loctestnum, loctesterr, setvec1, setvec2, true);
+    EqualSetVec(loctestnum, loctesterr, setvec1, setvec2, true);
 
-    // RemovePredecessor(loctestnum, loctesterr, setvec1, true, 9);
+    RemovePredecessor(loctestnum, loctesterr, setvec1, true, 9);
 
-    // EqualSetVec(loctestnum, loctesterr, setvec1, setvec2, false);
+    EqualSetVec(loctestnum, loctesterr, setvec1, setvec2, false);
 
-    // lasd::SetVec<int> setvec3(move(setvec2));
+    lasd::SetVec<int> setvec3(move(setvec2));
 
-    // Empty(loctestnum, loctesterr, setvec2, true);
-    // Size(loctestnum, loctesterr, setvec2, true, 0);
+    Empty(loctestnum, loctesterr, setvec2, true);
+    Size(loctestnum, loctesterr, setvec2, true, 0);
 
-    // Empty(loctestnum, loctesterr, setvec3, false);
-    // Size(loctestnum, loctesterr, setvec3, true, 7);
+    Empty(loctestnum, loctesterr, setvec3, false);
+    Size(loctestnum, loctesterr, setvec3, true, 7);
 
-    // setvec2 = move(setvec1);
+    setvec2 = move(setvec1);
 
-    // Empty(loctestnum, loctesterr, setvec1, true);
-    // Size(loctestnum, loctesterr, setvec1, true, 0);
+    Empty(loctestnum, loctesterr, setvec1, true);
+    Size(loctestnum, loctesterr, setvec1, true, 0);
 
-    // Empty(loctestnum, loctesterr, setvec2, false);
-    // Size(loctestnum, loctesterr, setvec2, true, 6);
+    Empty(loctestnum, loctesterr, setvec2, false);
+    Size(loctestnum, loctesterr, setvec2, true, 6);
 
-    // NonEqualSetVec(loctestnum, loctesterr, setvec3, setvec2, true);
+    NonEqualSetVec(loctestnum, loctesterr, setvec3, setvec2, true);
 
-    // Traverse(loctestnum, loctesterr, setvec2, true, &TraversePrint<int>);
-    // Traverse(loctestnum, loctesterr, setvec3, true, &TraversePrint<int>);
+    Traverse(loctestnum, loctesterr, setvec2, true, &TraversePrint<int>);
+    Traverse(loctestnum, loctesterr, setvec3, true, &TraversePrint<int>);
 
-    // InsertC(loctestnum, loctesterr, setvec2, true, 6);
+    InsertC(loctestnum, loctesterr, setvec2, true, 6);
 
-    // EqualSetVec(loctestnum, loctesterr, setvec3, setvec2, true);
+    EqualSetVec(loctestnum, loctesterr, setvec3, setvec2, true);
 
     /* ********************************************************************** */
 
@@ -237,8 +238,8 @@ void stestSetInt(uint & testnum, uint & testerr) {
 
     /* ********************************************************************** */
 
-    //EqualLinear(loctestnum, loctesterr, setvec3, setlst2, true);
-    //NonEqualLinear(loctestnum, loctesterr, setlst3, setvec2, false);
+    EqualLinear(loctestnum, loctesterr, setvec3, setlst2, true);
+    NonEqualLinear(loctestnum, loctesterr, setlst3, setvec2, false);
 
   }
   catch (...) {
@@ -264,43 +265,43 @@ void stestSetFloat(uint & testnum, uint & testerr) {
 
     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
 
-//     /* ********************************************************************** */
+    /* ********************************************************************** */
 
-//     lasd::SetVec<double> setvec1(lst);
+    lasd::SetVec<double> setvec1(lst);
 
-//     Empty(loctestnum, loctesterr, setvec1, false);
-//     Size(loctestnum, loctesterr, setvec1, true, 6);
+    Empty(loctestnum, loctesterr, setvec1, false);
+    Size(loctestnum, loctesterr, setvec1, true, 6);
 
-//     TraversePreOrder(loctestnum, loctesterr, setvec1, true, &TraversePrint<double>);
-//     TraversePostOrder(loctestnum, loctesterr, setvec1, true, &TraversePrint<double>);
+    TraversePreOrder(loctestnum, loctesterr, setvec1, true, &TraversePrint<double>);
+    TraversePostOrder(loctestnum, loctesterr, setvec1, true, &TraversePrint<double>);
 
-//     lasd::SetVec<double> setvec2;
+    lasd::SetVec<double> setvec2;
 
-//     InsertC(loctestnum, loctesterr, setvec2, true, 2.1);
-//     InsertC(loctestnum, loctesterr, setvec2, true, 0.4);
-//     InsertC(loctestnum, loctesterr, setvec2, true, 1.2);
-//     InsertC(loctestnum, loctesterr, setvec2, true, 3.5);
-//     InsertC(loctestnum, loctesterr, setvec2, true, 5.3);
-//     InsertC(loctestnum, loctesterr, setvec2, true, 4.0);
+    InsertC(loctestnum, loctesterr, setvec2, true, 2.1);
+    InsertC(loctestnum, loctesterr, setvec2, true, 0.4);
+    InsertC(loctestnum, loctesterr, setvec2, true, 1.2);
+    InsertC(loctestnum, loctesterr, setvec2, true, 3.5);
+    InsertC(loctestnum, loctesterr, setvec2, true, 5.3);
+    InsertC(loctestnum, loctesterr, setvec2, true, 4.0);
 
-//     EqualSetVec(loctestnum, loctesterr, setvec1, setvec2, true);
-//     NonEqualSetVec(loctestnum, loctesterr, setvec1, setvec2, false);
+    EqualSetVec(loctestnum, loctesterr, setvec1, setvec2, true);
+    NonEqualSetVec(loctestnum, loctesterr, setvec1, setvec2, false);
 
-//     setvec1.Clear();
-//     setvec2.Clear();
+    setvec1.Clear();
+    setvec2.Clear();
 
-//     InsertC(loctestnum, loctesterr, setvec1, true, 0.2);
-//     InsertC(loctestnum, loctesterr, setvec1, true, 1.1);
-//     InsertC(loctestnum, loctesterr, setvec1, true, 2.1);
+    InsertC(loctestnum, loctesterr, setvec1, true, 0.2);
+    InsertC(loctestnum, loctesterr, setvec1, true, 1.1);
+    InsertC(loctestnum, loctesterr, setvec1, true, 2.1);
 
-//     InsertC(loctestnum, loctesterr, setvec2, true, 2.1);
-//     InsertC(loctestnum, loctesterr, setvec2, true, 1.1);
-//     InsertC(loctestnum, loctesterr, setvec2, true, 0.2);
+    InsertC(loctestnum, loctesterr, setvec2, true, 2.1);
+    InsertC(loctestnum, loctesterr, setvec2, true, 1.1);
+    InsertC(loctestnum, loctesterr, setvec2, true, 0.2);
 
-//     EqualSetVec(loctestnum, loctesterr, setvec1, setvec2, true);
-//     NonEqualSetVec(loctestnum, loctesterr, setvec1, setvec2, false);
+    EqualSetVec(loctestnum, loctesterr, setvec1, setvec2, true);
+    NonEqualSetVec(loctestnum, loctesterr, setvec1, setvec2, false);
 
-//     /* ********************************************************************** */
+    /* ********************************************************************** */
 
     lasd::SetLst<double> setlst1(lst);
 
@@ -337,10 +338,10 @@ void stestSetFloat(uint & testnum, uint & testerr) {
     EqualSetLst(loctestnum, loctesterr, setlst1, setlst2, true);
     NonEqualSetLst(loctestnum, loctesterr, setlst1, setlst2, false);
 
-//     /* ********************************************************************** */
+    /* ********************************************************************** */
 
-//     EqualLinear(loctestnum, loctesterr, setvec1, setlst2, true);
-//     NonEqualLinear(loctestnum, loctesterr, setlst2, setvec2, false);
+    EqualLinear(loctestnum, loctesterr, setvec1, setlst2, true);
+    NonEqualLinear(loctestnum, loctesterr, setlst2, setvec2, false);
 
   }
   catch (...) {
@@ -368,45 +369,46 @@ void stestSetString(lasd::Set<string> & set, uint & testnum, uint & testerr) {
   testerr += loctesterr;
 }
 
-// void stestSetString(uint & testnum, uint & testerr) {
-//   uint loctestnum = 0, loctesterr = 0;
-//   cout << endl << "Begin of Set<string> Test" << endl;
-//   try {
-//     lasd::Vector<string> vec(5);
-//     SetAt(loctestnum, loctesterr, vec, true, 0, string("C"));
-//     SetAt(loctestnum, loctesterr, vec, true, 1, string("A"));
-//     SetAt(loctestnum, loctesterr, vec, true, 2, string("E"));
-//     SetAt(loctestnum, loctesterr, vec, true, 3, string("D"));
-//     SetAt(loctestnum, loctesterr, vec, true, 4, string("B"));
+void stestSetString(uint & testnum, uint & testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of Set<string> Test" << endl;
+  try {
+    lasd::Vector<string> vec(5);
+    SetAt(loctestnum, loctesterr, vec, true, 0, string("C"));
+    SetAt(loctestnum, loctesterr, vec, true, 1, string("A"));
+    SetAt(loctestnum, loctesterr, vec, true, 2, string("E"));
+    SetAt(loctestnum, loctesterr, vec, true, 3, string("D"));
+    SetAt(loctestnum, loctesterr, vec, true, 4, string("B"));
 
-//     /* ********************************************************************** */
+    /* ********************************************************************** */
 
-//     cout << endl << "Begin of SetVec<string> Test:" << endl;
-//     lasd::SetVec<string> setvec(vec);
-//     stestSetString(setvec, loctestnum, loctesterr);
-//     cout << endl << "Begin of SetLst<string> Test:" << endl;
-//     lasd::SetLst<string> setlst(vec);
-//     stestSetString(setlst, loctestnum, loctesterr);
-//     cout << "\n";
+    cout << endl << "Begin of SetVec<string> Test:" << endl;
+    lasd::SetVec<string> setvec(vec);
+    stestSetString(setvec, loctestnum, loctesterr);
+    cout << endl << "Begin of SetLst<string> Test:" << endl;
+    lasd::SetLst<string> setlst(vec);
+    stestSetString(setlst, loctestnum, loctesterr);
+    cout << "\n";
 
-//     /* ********************************************************************** */
+    /* ********************************************************************** */
 
-//     EqualLinear(loctestnum, loctesterr, setvec, setlst, true);
+    EqualLinear(loctestnum, loctesterr, setvec, setlst, true);
 
-//   }
-  // catch (...) {
-  //   loctestnum++; loctesterr++;
-  //   cout << endl << "Unmanaged error! " << endl;
-  // }
-//   cout << "End of Set<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
-// }
+  }
+  catch (...) {
+    loctestnum++; loctesterr++;
+    cout << endl << "Unmanaged error! " << endl;
+  }
+  cout << "End of Set<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  testnum += loctestnum;
+  testerr += loctesterr;
+}
 
 /* ************************************************************************** */
 
 void testSimpleExercise1B(uint & testnum, uint & testerr) {
-stestSetInt(testnum, testerr);
-//stestSetFloat(testnum, testerr);
-//testSetString(testnum, testerr);
-cout << endl << "Exercise 1B (Simple Test) (Errors/Tests: " << testerr << "/" << testnum << ")" << endl; }
+  stestSetInt(testnum, testerr);
+  stestSetFloat(testnum, testerr);
+  stestSetString(testnum, testerr);
+  cout << endl << "Exercise 1B (Simple Test) (Errors/Tests: " << testerr << "/" << testnum << ")" << endl;
+}

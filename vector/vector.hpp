@@ -14,8 +14,7 @@
   /* ************************************************************************** */
 
   template <typename Data>
-class Vector : virtual public MutableLinearContainer<Data>, public ResizableContainer
-{
+class Vector : virtual public MutableLinearContainer<Data>, public ResizableContainer{
   private:
 
   protected:
@@ -105,8 +104,7 @@ class Vector : virtual public MutableLinearContainer<Data>, public ResizableCont
   /* ************************************************************************** */
 
   template <typename Data>
-class SortableVector : public Vector<Data>, public SortableLinearContainer<Data>
-{
+class SortableVector : public Vector<Data>, public SortableLinearContainer<Data>{
   public:
     // Default constructor
     SortableVector() = default;
