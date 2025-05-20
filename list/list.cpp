@@ -12,9 +12,7 @@ namespace lasd {
     }
 
     template <typename Data>
-    List<Data>::Node::~Node(){
-        delete next;
-    }
+    List<Data>::Node::~Node() = default;
 
     template <typename Data>
     bool List<Data>::Node::operator==(const Node& node) const noexcept{
@@ -81,20 +79,17 @@ namespace lasd {
 
     template <typename Data>
     List<Data>::~List(){
-        delete head;
-        head = tail = nullptr;
-        size = 0;
+        Clear();
     }
 
     template <typename Data>
     List<Data>& List<Data>::operator=(const List<Data>& new_list) {
-        if (this != &new_list) // no self-assignment
-        {
-            Clear(); // Clear list
+        if (this != &new_list){
+            Clear(); 
 
             Node* new_temp = new_list.head;
             while (new_temp != nullptr) {
-                InsertAtBack(new_temp->element); // rebuild the list and copy elements
+                InsertAtBack(new_temp->element); 
                 new_temp = new_temp->next;
             }
         }
@@ -357,7 +352,12 @@ namespace lasd {
 
     template <typename Data>
     void List<Data>::Clear(){
-        delete head;
+        Node* curr = head;
+        while (curr != nullptr) {
+            Node* tmp = curr;
+            curr = curr->next;
+            delete tmp;
+        }
         head = tail = nullptr;
         size = 0;
     }

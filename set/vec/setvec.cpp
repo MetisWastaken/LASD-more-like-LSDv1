@@ -2,7 +2,7 @@ namespace lasd {
 
 template <typename Data>
 SetVec<Data>::SetVec(){
-    elements.Resize(5); 
+    elements.Resize(4); 
     size = 0;
     head = 0;
     tail = 0;
@@ -10,7 +10,7 @@ SetVec<Data>::SetVec(){
 
 template <typename Data>
 SetVec<Data>::SetVec(const TraversableContainer<Data>& cont) {
-    elements.Resize(cont.Size()*3); 
+    elements.Resize(cont.Size()*8); 
     size=0;
   cont.Traverse(
     [this](const Data& val) {
@@ -22,13 +22,13 @@ SetVec<Data>::SetVec(const TraversableContainer<Data>& cont) {
 
 template <typename Data>
 SetVec<Data>::SetVec(MappableContainer<Data>&& cont) {
-    elements.Resize(cont.Size()*3); 
-    size=0;
-  cont.Map(
-    [this](Data& val) {
-      this->Insert(std::move(val));
-    }
-  );
+    elements.Resize(cont.Size() * 8); 
+    size = 0;
+    cont.Map(
+        [this](Data& val) {
+            this->Insert(std::move(val));
+        }
+    );
 }
 
 
@@ -46,10 +46,12 @@ SetVec<Data>::SetVec(SetVec<Data>&& set) noexcept {
 
 template <typename Data>
 SetVec<Data>& SetVec<Data>::operator=(const SetVec<Data>& set) {
-    head=set.head;
-    tail=set.tail;
-    size=set.size;
-    elements = set.elements; 
+    if (this != &set) {
+        elements = set.elements; // copia profonda del vettore
+        head = set.head;
+        tail = set.tail;
+        size = set.size;
+    }
     return *this;
 }
 
@@ -66,13 +68,13 @@ SetVec<Data>& SetVec<Data>::operator=(SetVec<Data>&& set) noexcept {
 // Comparison operators
 template <typename Data>
 bool SetVec<Data>::operator==(const SetVec<Data>& set) const noexcept {
-     if(size!= set.size) return false;
-     for(ulong i=0; i<size; i++){
-        if((*this)[i] != set[i]) {
+    if (size != set.size) return false;
+    for (ulong i = 0; i < size; i++) {
+        if ((*this)[i] != set[i]) {
             return false;
         }
-     }
-     return true;
+    }
+    return true;
 }
 
 
@@ -99,9 +101,9 @@ bool SetVec<Data>::Insert(Data&& value) {
  if(Exists(value)) return false;
 
    ulong pos=BinarySearch(value);
-   ChangeCapacity();
-   Expand(pos);
    elements[(head+pos)%elements.Size()] = std::move(value);
+   Expand(pos);
+   ChangeCapacity();
    size++;
    return true;
 }
@@ -113,7 +115,6 @@ bool SetVec<Data>::Remove(const Data& value)
  if(!Exists(value)) return false;
 
     ulong pos = BinarySearch(value);
-
     Reduce(pos);
     size--;
     ChangeCapacity();
@@ -124,12 +125,13 @@ bool SetVec<Data>::Remove(const Data& value)
 template <typename Data>
 bool SetVec<Data>::Exists(const Data& value) const noexcept {
 
-    if(size==0)
+    if (size == 0)
         return false;
-    
+
     ulong pos = BinarySearch(value);
 
-    if(pos < size && elements[pos] == value) {
+    // Usa operator[] invece di elements[pos] per rispettare head/tail e l'ordine logico
+    if (pos < size && (*this)[pos] == value) {
         return true;
     }
     return false;
@@ -138,8 +140,8 @@ bool SetVec<Data>::Exists(const Data& value) const noexcept {
 
 template <typename Data>
 const Data& SetVec<Data>::operator[](ulong index) const {
-    if (elements.Size() == 0)
-        throw std::out_of_range("Empty set");
+    if (index >= size)
+        throw std::out_of_range("out of max range");
     return elements[(head+index)%elements.Size()];
 }
 
@@ -155,7 +157,7 @@ void SetVec<Data>::Clear() {
 
 template <typename Data>
 const Data& SetVec<Data>::Min() const {
-    if (elements.Size() == 0)
+    if (size == 0)
         throw std::length_error("Set is empty");
     return (*this)[0];
 }
@@ -163,7 +165,7 @@ const Data& SetVec<Data>::Min() const {
 
 template <typename Data>
 Data SetVec<Data>::MinNRemove() {
-    if (elements.Size() == 0)
+    if (size == 0)
         throw std::length_error("Set is empty");
     Data min = (*this)[0];
     RemoveMin();
@@ -173,14 +175,14 @@ Data SetVec<Data>::MinNRemove() {
 
 template <typename Data>
 void SetVec<Data>::RemoveMin() {
-    if (elements.Size() == 0)
+    if (size == 0)
         throw std::length_error("Set is empty");
     Remove((*this)[0]);
 }
 
 template <typename Data>
 const Data& SetVec<Data>::Max() const {
-    if (elements.Size() == 0)
+    if (size == 0)
         throw std::length_error("Set is empty");
     return (*this)[size-1];
 }
@@ -200,7 +202,7 @@ template <typename Data>
 void SetVec<Data>::RemoveMax() {
     if (size == 0)
         throw std::length_error("Set is empty");
-    Remove((*this)[size- 1]);
+    Remove((*this)[size-1]);
 }
 
 

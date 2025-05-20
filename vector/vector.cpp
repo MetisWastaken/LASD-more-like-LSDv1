@@ -11,7 +11,6 @@ Vector<Data>::Vector(const ulong newsize){
     } catch(const std::exception& e) {
         size = 0;
         arrayElements = nullptr;
-        std::cerr << e.what() << '\n';
     }
 }
 

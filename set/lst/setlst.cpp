@@ -73,11 +73,15 @@ bool SetLst<Data>::Insert(Data&& data) {
     if (BinarySearch(data) != nullptr) {
         return false;
     }
-    if (size == 0 || data > tail->element) {
+    if (size == 0) {
         List<Data>::InsertAtBack(std::move(data));
         return true;
     }
-    if (data < head->element) {
+    if (tail == nullptr || data > tail->element) {
+        List<Data>::InsertAtBack(std::move(data));
+        return true;
+    }
+    if (head == nullptr || data < head->element) {
         List<Data>::InsertAtFront(std::move(data));
         return true;
     }
@@ -85,10 +89,10 @@ bool SetLst<Data>::Insert(Data&& data) {
     while (temp->next != nullptr && temp->next->element < data) {
         temp = temp->next;
     }
+    size++;
     Node* newNode = new Node(std::move(data));
     newNode->next = temp->next;
-    temp->next = newNode;
-    ++size;
+    temp->next = newNode;;
     return true;
 }
 
@@ -97,14 +101,19 @@ bool SetLst<Data>::Insert(const Data& data) {
     if (BinarySearch(data) != nullptr) {
         return false;
     }
-    if (size == 0 || data > tail->element) {
+    if (size == 0) {
         List<Data>::InsertAtBack(data);
         return true;
     }
-    if (data < head->element) {
+    if (tail == nullptr || data > tail->element) {
+        List<Data>::InsertAtBack(data);
+        return true;
+    }
+    if (head == nullptr || data < head->element) {
         List<Data>::InsertAtFront(data);
         return true;
     }
+    // Inserimento ordinato in mezzo
     Node* temp = head;
     while (temp->next != nullptr && temp->next->element < data) {
         temp = temp->next;
@@ -112,13 +121,17 @@ bool SetLst<Data>::Insert(const Data& data) {
     Node* newNode = new Node(data);
     newNode->next = temp->next;
     temp->next = newNode;
-    ++size;
+    if (newNode->next == nullptr) tail = newNode;
+    size++;
     return true;
 }
 
 template <typename Data>
 bool SetLst<Data>::Remove(const Data& data) {
-    const Data* found = BinarySearch(data);
+    if (size == 0 || head == nullptr || tail == nullptr) {
+        return false;
+    }
+    const Node* found = BinarySearch(data);
     if (!found) {
         return false;
     }
@@ -138,10 +151,10 @@ bool SetLst<Data>::Remove(const Data& data) {
         Node* toDelete = temp->next;
         temp->next = toDelete->next;
         delete toDelete;
-        --size;
         if (temp->next == nullptr) {
             tail = temp;
         }
+        size--;
         return true;
     }
     return false;
@@ -164,13 +177,13 @@ void SetLst<Data>::Clear() {
 
 template <typename Data>
 const Data& SetLst<Data>::Min() const {
-    if (this->size == 0) throw std::length_error("Set is empty");
+    if (this->size == 0 || this->head == nullptr) throw std::length_error("Set is empty");
     return this->head->element;
 }
 
 template <typename Data>
 Data SetLst<Data>::MinNRemove() {
-    if (this->size == 0) throw std::length_error("Set is empty");
+    if (this->size == 0 || this->head == nullptr) throw std::length_error("Set is empty");
     Data min = this->head->element;
     this->RemoveMin();
     return min;
@@ -178,19 +191,19 @@ Data SetLst<Data>::MinNRemove() {
 
 template <typename Data>
 void SetLst<Data>::RemoveMin() {
-    if (this->size == 0) throw std::length_error("Set is empty");
+    if (this->size == 0 || this->head == nullptr) throw std::length_error("Set is empty");
     this->RemoveFromFront();
 }
 
 template <typename Data>
 const Data& SetLst<Data>::Max() const {
-    if (this->size == 0) throw std::length_error("Set is empty");
+    if (this->size == 0 || this->tail == nullptr) throw std::length_error("Set is empty");
     return this->tail->element;
 }
 
 template <typename Data>
 Data SetLst<Data>::MaxNRemove() {
-    if (this->size == 0) throw std::length_error("Set is empty");
+    if (this->size == 0 || this->tail == nullptr) throw std::length_error("Set is empty");
     Data max = this->tail->element;
     this->RemoveMax();
     return max;
@@ -198,13 +211,13 @@ Data SetLst<Data>::MaxNRemove() {
 
 template <typename Data>
 void SetLst<Data>::RemoveMax() {
-    if (this->size == 0) throw std::length_error("Set is empty");
+    if (this->size == 0 || this->tail == nullptr) throw std::length_error("Set is empty");
     this->RemoveFromBack();
 }
 
 template <typename Data>
 const Data& SetLst<Data>::Predecessor(const Data& data) const {
-    if (this->size == 0) throw std::length_error("Set is empty");
+    if (this->size == 0 || this->head == nullptr) throw std::length_error("Set is empty");
     Node* temp = this->head;
     Node* pred = nullptr;
     while (temp != nullptr && temp->element < data) {
@@ -217,20 +230,20 @@ const Data& SetLst<Data>::Predecessor(const Data& data) const {
 
 template <typename Data>
 Data SetLst<Data>::PredecessorNRemove(const Data& data) {
-    const Data& pred = Predecessor(data);
+    Data pred = Predecessor(data);
     this->Remove(pred);
     return pred;
 }
 
 template <typename Data>
 void SetLst<Data>::RemovePredecessor(const Data& data) {
-    const Data& pred = Predecessor(data);
+    Data pred = Predecessor(data);
     this->Remove(pred);
 }
 
 template <typename Data>
 const Data& SetLst<Data>::Successor(const Data& data) const {
-    if (this->size == 0) throw std::length_error("Set is empty");
+    if (this->size == 0 || this->head == nullptr) throw std::length_error("Set is empty");
     Node* temp = this->head;
     while (temp != nullptr && temp->element <= data) {
         temp = temp->next;
@@ -241,30 +254,31 @@ const Data& SetLst<Data>::Successor(const Data& data) const {
 
 template <typename Data>
 Data SetLst<Data>::SuccessorNRemove(const Data& data) {
-    const Data& succ = Successor(data);
+    Data succ = Successor(data);
     this->Remove(succ);
     return succ;
 }
 
 template <typename Data>
 void SetLst<Data>::RemoveSuccessor(const Data& data) {
-    const Data& succ = Successor(data);
+    Data succ = Successor(data);
     this->Remove(succ);
 }
 
 template <typename Data>
-const Data* SetLst<Data>::BinarySearch(const Data& value) const {
-    if (this->size == 0) return nullptr;
+const SetLst<Data>::Node* SetLst<Data>::BinarySearch(const Data& value) const {
+    if (this->size == 0 || this->head == nullptr) return nullptr;
     long left = 0;
     long right = this->size - 1;
     while (left <= right) {
         long mid = left + (right - left) / 2;
         Node* curr = this->head;
-        for (long i = 0; i < mid; ++i) {
+        for (long i = 0; i < mid && curr != nullptr; ++i) {
             curr = curr->next;
         }
+        if (curr == nullptr) return nullptr;
         if (curr->element == value) {
-            return &(curr->element);
+            return curr;
         } else if (curr->element < value) {
             left = mid + 1;
         } else {

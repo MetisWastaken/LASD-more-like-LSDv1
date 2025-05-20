@@ -119,7 +119,7 @@ public:
   /* ************************************************************************ */
   virtual void Resize(ulong newsize){
     size=newsize;
-  };
+  }
 
   // type Resize(argument) specifiers;
 
