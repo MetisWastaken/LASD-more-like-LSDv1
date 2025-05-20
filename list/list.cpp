@@ -364,9 +364,7 @@ namespace lasd {
     {
         for (; curr != nullptr; curr=curr->next)
         {
-            std::cout<<"palle"<<std::endl; 
             fun(curr->element);
-
         }
     }
 
