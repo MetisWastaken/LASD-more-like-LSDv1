@@ -47,7 +47,7 @@ SetVec<Data>::SetVec(SetVec<Data>&& set) noexcept {
 template <typename Data>
 SetVec<Data>& SetVec<Data>::operator=(const SetVec<Data>& set) {
     if (this != &set) {
-        elements = set.elements; // copia profonda del vettore
+        elements = set.elements; 
         head = set.head;
         tail = set.tail;
         size = set.size;
@@ -130,7 +130,6 @@ bool SetVec<Data>::Exists(const Data& value) const noexcept {
 
     ulong pos = BinarySearch(value);
 
-    // Usa operator[] invece di elements[pos] per rispettare head/tail e l'ordine logico
     if (pos < size && (*this)[pos] == value) {
         return true;
     }
@@ -220,7 +219,7 @@ const Data& SetVec<Data>::Predecessor(const Data& value) const {
 
 template <typename Data>
 Data SetVec<Data>::PredecessorNRemove(const Data& value) {
-    const Data& pred = Predecessor(value);
+    const Data pred = Predecessor(value);
     Remove(pred);
     return pred;
 }
@@ -249,7 +248,7 @@ const Data& SetVec<Data>::Successor(const Data& value) const {
 
 template <typename Data>
 Data SetVec<Data>::SuccessorNRemove(const Data& value) {
-    const Data& succ = Successor(value);
+    const Data succ = Successor(value);
     Remove(succ);
     return succ;
 }

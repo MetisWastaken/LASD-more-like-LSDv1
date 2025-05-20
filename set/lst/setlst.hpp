@@ -34,7 +34,7 @@ protected:
 public:
 
 
-  const Node* BinarySearch(const Data&) const;
+   Node* BinarySearch(const Data&) const;
 
   // Default constructor
    SetLst() = default;

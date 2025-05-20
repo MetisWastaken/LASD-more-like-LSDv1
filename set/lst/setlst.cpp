@@ -128,11 +128,7 @@ bool SetLst<Data>::Insert(const Data& data) {
 
 template <typename Data>
 bool SetLst<Data>::Remove(const Data& data) {
-    if (size == 0 || head == nullptr || tail == nullptr) {
-        return false;
-    }
-    const Node* found = BinarySearch(data);
-    if (!found) {
+    if (size == 0) {
         return false;
     }
     if (data == tail->element) {
@@ -143,21 +139,19 @@ bool SetLst<Data>::Remove(const Data& data) {
         List<Data>::RemoveFromFront();
         return true;
     }
+    Node* found = BinarySearch(data);
+    if (!found) {
+        return false;
+    }
     Node* temp = head;
-    while (temp->next != nullptr && !(temp->next->element == data)) {
+    while (temp->next != found) {
         temp = temp->next;
     }
-    if (temp->next != nullptr) {
-        Node* toDelete = temp->next;
-        temp->next = toDelete->next;
-        delete toDelete;
-        if (temp->next == nullptr) {
-            tail = temp;
-        }
+        temp->next = found->next;
+        found->next=nullptr;
+        delete found;
         size--;
         return true;
-    }
-    return false;
 }
 
 template <typename Data>
@@ -266,7 +260,7 @@ void SetLst<Data>::RemoveSuccessor(const Data& data) {
 }
 
 template <typename Data>
-const SetLst<Data>::Node* SetLst<Data>::BinarySearch(const Data& value) const {
+SetLst<Data>::Node* SetLst<Data>::BinarySearch(const Data& value)const{
     if (this->size == 0 || this->head == nullptr) return nullptr;
     long left = 0;
     long right = this->size - 1;

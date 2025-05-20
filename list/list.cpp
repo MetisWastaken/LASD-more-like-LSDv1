@@ -12,7 +12,9 @@ namespace lasd {
     }
 
     template <typename Data>
-    List<Data>::Node::~Node() = default;
+    List<Data>::Node::~Node(){
+        delete next;
+    };
 
     template <typename Data>
     bool List<Data>::Node::operator==(const Node& node) const noexcept{
@@ -79,7 +81,7 @@ namespace lasd {
 
     template <typename Data>
     List<Data>::~List(){
-        Clear();
+        delete head;
     }
 
     template <typename Data>
@@ -352,12 +354,7 @@ namespace lasd {
 
     template <typename Data>
     void List<Data>::Clear(){
-        Node* curr = head;
-        while (curr != nullptr) {
-            Node* tmp = curr;
-            curr = curr->next;
-            delete tmp;
-        }
+        delete head;
         head = tail = nullptr;
         size = 0;
     }
@@ -367,7 +364,9 @@ namespace lasd {
     {
         for (; curr != nullptr; curr=curr->next)
         {
+            std::cout<<"palle"<<std::endl; 
             fun(curr->element);
+
         }
     }
 
