@@ -1,4 +1,4 @@
-# Exercise1-LASD-WIP
+# LASD-WIP
 
 Non ho idea di ciò che sto facendo xD
 ------------------------------------------------------------
