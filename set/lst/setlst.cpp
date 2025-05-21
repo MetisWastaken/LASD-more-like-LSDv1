@@ -92,36 +92,39 @@ bool SetLst<Data>::Insert(Data&& data) {
     size++;
     Node* newNode = new Node(std::move(data));
     newNode->next = temp->next;
-    temp->next = newNode;;
+    temp->next = newNode;
     return true;
 }
 
 template <typename Data>
 bool SetLst<Data>::Insert(const Data& data) {
-    if (BinarySearch(data) != nullptr) {
+
+     if (BinarySearch(data) != nullptr) {
         return false;
     }
     if (size == 0) {
         List<Data>::InsertAtBack(data);
         return true;
     }
-    if (tail == nullptr || data > tail->element) {
+    if (data > tail->element) {
         List<Data>::InsertAtBack(data);
         return true;
     }
-    if (head == nullptr || data < head->element) {
+    if (data < head->element) {
         List<Data>::InsertAtFront(data);
         return true;
     }
     // Inserimento ordinato in mezzo
     Node* temp = head;
-    while (temp->next != nullptr && temp->next->element < data) {
+    while (temp->next->element < data) {
         temp = temp->next;
     }
     Node* newNode = new Node(data);
     newNode->next = temp->next;
     temp->next = newNode;
-    if (newNode->next == nullptr) tail = newNode;
+    if (newNode->next == nullptr) {
+        tail = newNode;
+    }
     size++;
     return true;
 }
@@ -147,7 +150,7 @@ bool SetLst<Data>::Remove(const Data& data) {
     while (temp->next != found) {
         temp = temp->next;
     }
-        temp->next = found->next;
+        temp->next=found->next;
         found->next=nullptr;
         delete found;
         size--;
@@ -197,7 +200,7 @@ const Data& SetLst<Data>::Max() const {
 
 template <typename Data>
 Data SetLst<Data>::MaxNRemove() {
-    if (this->size == 0 || this->tail == nullptr) throw std::length_error("Set is empty");
+    if (this->size == 0 ) throw std::length_error("Set is empty");
     Data max = this->tail->element;
     this->RemoveMax();
     return max;

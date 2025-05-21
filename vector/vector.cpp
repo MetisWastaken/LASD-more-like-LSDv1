@@ -1,6 +1,6 @@
 
 namespace lasd {
-/* ************************************************************************ */
+
 
 // Specific constructors
 template <typename Data>
@@ -34,7 +34,7 @@ Vector<Data>::Vector(MappableContainer<Data>&& cont):Vector(cont.Size()){
     );
 }
 
-/* ************************************************************************** */
+
 //copy constructor
 template <typename Data>
 Vector<Data>::Vector(const Vector& vect){
@@ -50,7 +50,7 @@ Vector<Data>::Vector(Vector&& vect) noexcept{
     std::swap(arrayElements, vect.arrayElements);
 }
 
-/* ************************************************************************** */
+
 //copy assignment (Vector)
 template <typename Data>
 Vector<Data>& Vector<Data>::operator=(const Vector<Data>& vect){
@@ -67,7 +67,7 @@ Vector<Data>& Vector<Data>::operator=(Vector<Data>&& vect) noexcept{
     return *this;
 }
 
-/* ************************************************************************** */
+
 //comparison operators 
 template <typename Data>
 bool Vector<Data>::operator==(const Vector<Data>& vect) const noexcept{
@@ -89,9 +89,8 @@ inline bool Vector<Data>::operator != (const Vector<Data>& vect) const noexcept{
     return !(*this == vect);
 }
 
-/* ************************************************************************ */
 
-// Specific member functions (inherited from MutableLinearContainer)
+// Specific member functions 
 template <typename Data>
 Data& Vector<Data>::operator [] (const ulong i){
     if(i < size)
@@ -118,8 +117,8 @@ Data& Vector<Data>::Back()
 }
 
 
-/* ************************************************************************ */
-// Specific member functions (inherited from LinearContainer)
+
+// Specific member functions
 template <typename Data>
 const Data& Vector<Data>::operator[](const ulong i) const 
 {
@@ -138,8 +137,8 @@ const Data& Vector<Data>::Back() const
     return const_cast<Vector<Data>&>(*this).Back();
 }
 
-/* ************************************************************************ */
-// Specific member function (inherited from ClearableContainer and ResizeableContainer)
+
+// Specific member function 
 template <typename Data>
 void Vector<Data>::Clear()
 {

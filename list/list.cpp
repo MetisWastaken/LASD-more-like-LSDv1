@@ -235,7 +235,7 @@ namespace lasd {
             while(temp->next != tail){
                 temp = temp->next;
             }    
-
+            delete tail;
             temp->next = nullptr;
             tail = temp;
         }    
