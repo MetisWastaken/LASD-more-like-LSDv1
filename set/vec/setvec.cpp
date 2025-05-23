@@ -6,24 +6,29 @@ SetVec<Data>::SetVec(){
     size = 0;
     head = 0;
     tail = 0;
+    
 }
 
 template <typename Data>
 SetVec<Data>::SetVec(const TraversableContainer<Data>& cont) {
-    elements.Resize(cont.Size()*8); 
-    size=0;
-  cont.Traverse(
-    [this](const Data& val) {
-      this->Insert(val);
-    }
-  );
+    size = 0;
+    head = 0;
+    tail = 0;
+    elements.Resize(4);
+    cont.Traverse(
+        [this](const Data& val) {
+            this->Insert(val);
+        }
+    );
 }
 
 
 template <typename Data>
 SetVec<Data>::SetVec(MappableContainer<Data>&& cont) {
-    elements.Resize(cont.Size() * 8); 
     size = 0;
+    head = 0;
+    tail = 0;
+    elements.Resize(4);
     cont.Map(
         [this](Data& val) {
             this->Insert(std::move(val));
@@ -34,7 +39,10 @@ SetVec<Data>::SetVec(MappableContainer<Data>&& cont) {
 
 template <typename Data>
 SetVec<Data>::SetVec(const SetVec<Data>& set) {
-    *this=set;
+    elements = set.elements;
+    head = set.head;
+    tail = set.tail;
+    size = set.size;
 }
 
 
@@ -86,37 +94,39 @@ bool SetVec<Data>::operator!=(const SetVec<Data>& set) const noexcept {
 
 template <typename Data>
 bool SetVec<Data>::Insert(const Data& value) {
-   if(Exists(value)) return false;
+    if(Exists(value)) return false;
 
-   ulong pos=BinarySearch(value);
-   ChangeCapacity();
-   Expand(pos);
-   elements[(head+pos)%elements.Size()] = value;
-   size++;
-   return true;
+    ulong pos=BinarySearch(value);
+    ChangeCapacity();
+    Expand(pos);
+    elements[(head+pos)%elements.Size()] = value;
+    size++;
+    return true;
 }
 
 template <typename Data>
 bool SetVec<Data>::Insert(Data&& value) {
- if(Exists(value)) return false;
+    if(Exists(value)) return false;
 
-   ulong pos=BinarySearch(value);
-   elements[(head+pos)%elements.Size()] = std::move(value);
-   Expand(pos);
-   ChangeCapacity();
-   size++;
-   return true;
+    ulong pos = BinarySearch(value);
+    ChangeCapacity();
+    Expand(pos);
+    elements[(head+pos)%elements.Size()] = std::move(value);
+    size++;
+    
+    return true;
 }
 
 
 template <typename Data>
 bool SetVec<Data>::Remove(const Data& value) 
 {
- if(!Exists(value)) return false;
+    if(!Exists(value)) return false;
 
     ulong pos = BinarySearch(value);
     Reduce(pos);
     size--;
+   
     ChangeCapacity();
     return true;
 }
@@ -140,7 +150,7 @@ bool SetVec<Data>::Exists(const Data& value) const noexcept {
 template <typename Data>
 const Data& SetVec<Data>::operator[](ulong index) const {
     if (index >= size)
-        throw std::out_of_range("out of max range");
+        throw std::out_of_range("Index out of range");
     return elements[(head+index)%elements.Size()];
 }
 
@@ -234,15 +244,19 @@ void SetVec<Data>::RemovePredecessor(const Data& value) {
 
 template <typename Data>
 const Data& SetVec<Data>::Successor(const Data& value) const {
-    if (elements.Size() == 0)
+    if (size == 0)
         throw std::length_error("Set is empty");
     ulong pos = BinarySearch(value);
     if (pos >= size)
-        throw std::length_error("No successor");
-    if ((*this)[pos] == value)
-        return (*this)[pos + 1];
-    else
-        return (*this)[pos];
+        throw std::length_error("No successor found");
+    if ((*this)[pos] == value) {
+        if (pos + 1 >= size)
+            throw std::length_error("No successor found");
+        
+        return elements[(head + pos + 1) % elements.Size()];
+    } else {
+        return elements[(head + pos) % elements.Size()];
+    }
 }
 
 

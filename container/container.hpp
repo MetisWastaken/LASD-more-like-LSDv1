@@ -43,7 +43,7 @@ public:
     return(size==0);
   }
 
- inline  virtual ulong Size()const noexcept{
+ inline virtual ulong Size()const noexcept{
     return size;
   }
   // Specific member functions
@@ -124,7 +124,7 @@ public:
   // type Resize(argument) specifiers;
 
   /* ************************************************************************ */
-  inline void Clear()override{
+  void Clear()override{
     Resize(0);
   }
 

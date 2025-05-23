@@ -54,7 +54,9 @@ public:
 
   // Specific member functions
 
-  virtual const Data& operator[](ulong)const=0; // (non-mutable version; concrete function must throw std::out_of_range when out of range)
+  virtual const Data& operator[](ulong index) const {
+    throw std::out_of_range("operator[]: index out of range");
+  } // (non-mutable version; concrete function must throw std::out_of_range when out of range)
   
 
   virtual const Data& Front() const { 
@@ -155,7 +157,9 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  void Map (MapFun fun) override { PreOrderMap(fun); }; // Override MappableContainer member
+  void Map (MapFun fun) override { 
+    PreOrderMap(fun); 
+  }// Override MappableContainer member
 
   /* ************************************************************************ */
 

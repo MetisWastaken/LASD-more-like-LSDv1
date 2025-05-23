@@ -8,7 +8,7 @@ namespace lasd {
             PreOrderMap(fun);
         }
 
-        template<typename Data>
+    template<typename Data>
 
         void PostOrderMappableContainer<Data>::Map(MapFun fun){
             PostOrderMap(fun);
