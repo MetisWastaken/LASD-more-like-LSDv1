@@ -227,9 +227,10 @@ namespace lasd {
         if(head == nullptr)
             throw std::length_error("Access to empty list");
 
-        if (head == tail)
+        if (head == tail) {
+            delete head;
             head = tail = nullptr;
-        else{
+        } else {
             Node* temp = head;
 
             while(temp->next != tail){
