@@ -170,7 +170,6 @@ void Vector<Data>::Resize(const ulong newsize)
     }
 }
 
-/* ************************************************************************** */
 //specific constructor (SortableVector)
 
 template <typename Data>
@@ -182,7 +181,6 @@ SortableVector<Data>::SortableVector(const TraversableContainer<Data>& cont) : V
 template <typename Data>
 SortableVector<Data>::SortableVector(MappableContainer<Data>&& cont) : Vector<Data>(std::move(cont)) {}
 
-/* ************************************************************************** */
 // Copy Constructor and Move Constructor (SortableVector)
 template <typename Data>
 SortableVector<Data>::SortableVector(const SortableVector<Data>& vect) : Vector<Data>(vect) {}
@@ -190,7 +188,7 @@ SortableVector<Data>::SortableVector(const SortableVector<Data>& vect) : Vector<
 template <typename Data>
 SortableVector<Data>::SortableVector(SortableVector<Data>&& vect) noexcept : Vector<Data>(std::move(vect)) {}
 
-/* ************************************************************************** */
+
 //Copy Assignment and Move Assignment (SortableVector)
 template <typename Data>
 SortableVector<Data>& SortableVector<Data>::operator=(const SortableVector<Data>& vect)

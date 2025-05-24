@@ -140,8 +140,10 @@ void NonEqualList(uint & testnum, uint & testerr, const lasd::List<Data> & lst1,
 
 /* ************************************************************************** */
 
-// Test function
-void testListInt(uint & testnum, uint & testerr);
+// Test functions
+void testLis(uint & testnum, uint & testerr);
+void testListChar(uint & testnum, uint & testerr);
+void testListDouble(uint & testnum, uint & testerr);
 
 /* ************************************************************************** */
 

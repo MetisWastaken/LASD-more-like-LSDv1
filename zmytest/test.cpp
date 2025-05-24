@@ -1,7 +1,4 @@
 
-// #include "list/listTest.cpp"
-// #include "set/setTest.cpp"
-
 #include "vector/vector.hpp"
 #include "vector/vector.cpp"
 
@@ -22,20 +19,49 @@ void mytest(){
     uint loctestnum = 0, loctesterr = 0;
     uint stestnum = 0, stesterr = 0;
 
-    lasd::testVectorInt(loctestnum, loctesterr);
+    lasd::testVector(loctestnum, loctesterr);
     stestnum += loctestnum; stesterr += loctesterr;
 
     loctestnum = 0; loctesterr = 0;
-    lasd::testListInt(loctestnum, loctesterr);
+    lasd::testVectorChar(loctestnum, loctesterr);
     stestnum += loctestnum; stesterr += loctesterr;
 
     loctestnum = 0; loctesterr = 0;
-    lasd::testSetInt(loctestnum, loctesterr);
+    lasd::testVectorDouble(loctestnum, loctesterr);
     stestnum += loctestnum; stesterr += loctesterr;
 
-    cout << endl << "----- Test Suite Summary -> Vector, List and Set -----" << endl;
+    loctestnum = 0; loctesterr = 0;
+    lasd::testVectorWithCharList(loctestnum, loctesterr);
+    stestnum += loctestnum; stesterr += loctesterr;
+
+    loctestnum = 0; loctesterr = 0;
+    lasd::testLis(loctestnum, loctesterr);
+    stestnum += loctestnum; stesterr += loctesterr;
+
+    loctestnum = 0; loctesterr = 0;
+    lasd::testListChar(loctestnum, loctesterr);
+    stestnum += loctestnum; stesterr += loctesterr;
+
+    loctestnum = 0; loctesterr = 0;
+    lasd::testListDouble(loctestnum, loctesterr);
+    stestnum += loctestnum; stesterr += loctesterr;
+
+    loctestnum = 0; loctesterr = 0;
+    lasd::testSet(loctestnum, loctesterr);
+    stestnum += loctestnum; stesterr += loctesterr;
+
+    loctestnum = 0; loctesterr = 0;
+    lasd::testSetChar(loctestnum, loctesterr);
+    stestnum += loctestnum; stesterr += loctesterr;
+
+    loctestnum = 0; loctesterr = 0;
+    lasd::testSetDouble(loctestnum, loctesterr);
+    stestnum += loctestnum; stesterr += loctesterr;
+
+    cout << endl << "----- My Test Suite Summary -> Vector, List and Set -----" << endl;
     cout << "Total tests: " << stestnum << endl;
     cout << "Total errors: " << stesterr << endl;
+    cout << "Goodbye! " << endl;
     
 }
 

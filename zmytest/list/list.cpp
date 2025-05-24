@@ -11,7 +11,7 @@ using namespace std;
 #include "../list/list.hpp"
 
 namespace lasd{
-    void testListInt(uint & testnum, uint & testerr) 
+    void testLis(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
         cout << endl << "Begin of List Test:" << endl;
@@ -61,6 +61,106 @@ namespace lasd{
             cout << endl << "Unmanaged error! " << endl;
         }
         cout << "End of List<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        testnum += loctestnum;
+        testerr += loctesterr;
+    }
+
+    void testListChar(uint & testnum, uint & testerr) 
+    {
+        uint loctestnum = 0, loctesterr = 0;
+        cout << endl << "Begin of List<char> Test:" << endl;
+        try {  
+            lasd::List<char> lst;
+            Empty(loctestnum, loctesterr, lst, true);
+            
+            InsertAtFront(loctestnum, loctesterr, lst, true, 'A');
+            GetFront(loctestnum, loctesterr, lst, true, 'A');
+    
+            InsertAtFront(loctestnum, loctesterr, lst, true, 'C');
+            GetFront(loctestnum, loctesterr, lst, true, 'C');
+    
+            Exists(loctestnum, loctesterr, lst, true, 'A');
+            Exists(loctestnum, loctesterr, lst, true, 'C');
+    
+            TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<char>);
+            TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<char>);
+    
+            lasd::List<char> equalLst1 = lst;
+            EqualList(loctestnum, loctesterr, lst, equalLst1, true);
+    
+            lasd::List<char> equalLst2 = move(lst);
+            EqualList(loctestnum, loctesterr, lst, equalLst2, false);
+            NonEqualList(loctestnum, loctesterr, lst, equalLst2, true);
+    
+            lst = equalLst1;
+    
+            Traverse(loctestnum, loctesterr, lst, true, &TraversePrint<char>);
+            TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<char>);
+            TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<char>);
+    
+            lst.Clear();
+            Empty(loctestnum, loctesterr, lst, true);
+            Size(loctestnum, loctesterr, lst, true, 0);
+    
+            InsertAtFront(loctestnum, loctesterr, lst, true, 'X');
+            RemoveFromFront(loctestnum, loctesterr, lst, true);
+            Empty(loctestnum, loctesterr, lst, true);
+
+        } catch (...) {
+            loctestnum++; loctesterr++;
+            cout << endl << "Unmanaged error! " << endl;
+        }
+        cout << "End of List<char> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        testnum += loctestnum;
+        testerr += loctesterr;
+    }
+
+    void testListDouble(uint & testnum, uint & testerr) 
+    {
+        uint loctestnum = 0, loctesterr = 0;
+        cout << endl << "Begin of List<double> Test:" << endl;
+        try {  
+            lasd::List<double> lst;
+            Empty(loctestnum, loctesterr, lst, true);
+            
+            InsertAtFront(loctestnum, loctesterr, lst, true, 1.5);
+            GetFront(loctestnum, loctesterr, lst, true, 1.5);
+    
+            InsertAtFront(loctestnum, loctesterr, lst, true, 3.7);
+            GetFront(loctestnum, loctesterr, lst, true, 3.7);
+    
+            Exists(loctestnum, loctesterr, lst, true, 1.5);
+            Exists(loctestnum, loctesterr, lst, true, 3.7);
+    
+            TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
+            TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
+    
+            lasd::List<double> equalLst1 = lst;
+            EqualList(loctestnum, loctesterr, lst, equalLst1, true);
+    
+            lasd::List<double> equalLst2 = move(lst);
+            EqualList(loctestnum, loctesterr, lst, equalLst2, false);
+            NonEqualList(loctestnum, loctesterr, lst, equalLst2, true);
+    
+            lst = equalLst1;
+    
+            Traverse(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
+            TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
+            TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
+    
+            lst.Clear();
+            Empty(loctestnum, loctesterr, lst, true);
+            Size(loctestnum, loctesterr, lst, true, 0);
+    
+            InsertAtFront(loctestnum, loctesterr, lst, true, 9.9);
+            RemoveFromFront(loctestnum, loctesterr, lst, true);
+            Empty(loctestnum, loctesterr, lst, true);
+
+        } catch (...) {
+            loctestnum++; loctesterr++;
+            cout << endl << "Unmanaged error! " << endl;
+        }
+        cout << "End of List<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }

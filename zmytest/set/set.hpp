@@ -67,9 +67,4 @@ void NonEqualSetVec(uint & testnum, uint & testerr, const lasd::SetVec<Data> & s
 
 /* ************************************************************************** */
 
-// Test function
-void testSetInt(uint & testnum, uint & testerr);
-
-/* ************************************************************************** */
-
 #endif
