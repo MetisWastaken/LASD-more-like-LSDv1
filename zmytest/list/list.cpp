@@ -14,7 +14,7 @@ namespace lasd{
     void testLis(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
-        cout << endl << "Begin of List Test:" << endl;
+        cout << endl << "Begin of List INT Test:" << endl;
         try {  
             lasd::List<int> lst;
             Empty(loctestnum, loctesterr, lst, true);
@@ -60,7 +60,7 @@ namespace lasd{
             loctestnum++; loctesterr++;
             cout << endl << "Unmanaged error! " << endl;
         }
-        cout << "End of List<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        cout << "End of List INT Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }
@@ -68,7 +68,7 @@ namespace lasd{
     void testListChar(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
-        cout << endl << "Begin of List<char> Test:" << endl;
+        cout << endl << "Begin of List CHAR Test:" << endl;
         try {  
             lasd::List<char> lst;
             Empty(loctestnum, loctesterr, lst, true);
@@ -110,7 +110,7 @@ namespace lasd{
             loctestnum++; loctesterr++;
             cout << endl << "Unmanaged error! " << endl;
         }
-        cout << "End of List<char> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        cout << "End of List CHAR Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }
@@ -118,7 +118,7 @@ namespace lasd{
     void testListDouble(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
-        cout << endl << "Begin of List<double> Test:" << endl;
+        cout << endl << "Begin of List DOUBLE Test:" << endl;
         try {  
             lasd::List<double> lst;
             Empty(loctestnum, loctesterr, lst, true);
@@ -160,7 +160,7 @@ namespace lasd{
             loctestnum++; loctesterr++;
             cout << endl << "Unmanaged error! " << endl;
         }
-        cout << "End of List<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        cout << "End of List DOUBLE Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }

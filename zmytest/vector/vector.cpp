@@ -14,7 +14,7 @@ namespace lasd{
     void testVector(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
-        cout << endl << "Begin of Vector Test:" << endl;
+        cout << endl << "Begin of Vector INT Test:" << endl;
         try {  
             lasd::SortableVector<int> vec;
             Empty(loctestnum, loctesterr, vec, true);
@@ -58,7 +58,7 @@ namespace lasd{
             loctestnum++; loctesterr++;
             cout << endl << "Unmanaged error! " << endl;
         }
-        cout << "End of Vector<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        cout << "End of Vector INT Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }
@@ -66,7 +66,7 @@ namespace lasd{
     void testVectorChar(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
-        cout << endl << "Begin of Vector<char> Test:" << endl;
+        cout << endl << "Begin of Vector CHAR Test:" << endl;
         try {  
             lasd::SortableVector<char> vec;
             Empty(loctestnum, loctesterr, vec, true);
@@ -106,7 +106,7 @@ namespace lasd{
             loctestnum++; loctesterr++;
             cout << endl << "Unmanaged error! " << endl;
         }
-        cout << "End of Vector<char> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        cout << "End of Vector CHAR Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }
@@ -114,7 +114,7 @@ namespace lasd{
     void testVectorDouble(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
-        cout << endl << "Begin of Vector<double> Test:" << endl;
+        cout << endl << "Begin of Vector DOUBLE Test:" << endl;
         try {  
             lasd::SortableVector<double> vec;
             Empty(loctestnum, loctesterr, vec, true);
@@ -154,7 +154,7 @@ namespace lasd{
             loctestnum++; loctesterr++;
             cout << endl << "Unmanaged error! " << endl;
         }
-        cout << "End of Vector<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        cout << "End of Vector DOUBLE Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }
@@ -162,7 +162,7 @@ namespace lasd{
     void testVectorWithCharList(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
-        cout << endl << "Begin of Vector Test with Character List:" << endl;
+        cout << endl << "Begin of Vector CHAR Test:" << endl;
         try {  
             //list of chr
             std::vector<char> mylist = {'A', 'B', 'C', 'D', 'E'};
@@ -226,7 +226,7 @@ namespace lasd{
             loctestnum++; loctesterr++;
             cout << endl << "Unmanaged error! " << endl;
         }
-        cout << "End of Vector Test with Character List! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        cout << "End of Vector CHAR Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }

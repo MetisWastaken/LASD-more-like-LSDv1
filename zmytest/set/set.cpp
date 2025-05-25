@@ -15,10 +15,10 @@ namespace lasd{
     void testSet(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
-        cout << endl << "Begin of Set<int> Test:" << endl;
+        cout << endl << "Begin of Set INT Test:" << endl;
         try {  
             // Test SetVec
-            cout << endl << "Testing SetVec..." << endl;
+         
             lasd::SetVec<int> setvec;
             Empty(loctestnum, loctesterr, setvec, true);
             Size(loctestnum, loctesterr, setvec, true, 0);
@@ -50,7 +50,7 @@ namespace lasd{
             setvec = equalSetVec1;
     
             // Test SetLst
-            cout << endl << "Testing SetLst..." << endl;
+            
             lasd::SetLst<int> setlst;
             Empty(loctestnum, loctesterr, setlst, true);
             Size(loctestnum, loctesterr, setlst, true, 0);
@@ -100,7 +100,7 @@ namespace lasd{
             loctestnum++; loctesterr++;
             cout << endl << "Unmanaged error! " << endl;
         }
-        cout << "End of Set<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        cout << "End of Set INT Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }
@@ -108,10 +108,9 @@ namespace lasd{
     void testSetChar(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
-        cout << endl << "Begin of Set<char> Test:" << endl;
+        cout << endl << "Begin of Set CHAR Test:" << endl;
         try {  
-           
-            cout << endl << "Testing SetVec<char>..." << endl;
+         
             lasd::SetVec<char> setvec;
             Empty(loctestnum, loctesterr, setvec, true);
             Size(loctestnum, loctesterr, setvec, true, 0);
@@ -138,8 +137,7 @@ namespace lasd{
             NonEqualSetVec(loctestnum, loctesterr, setvec, equalSetVec2, true);
     
             setvec = equalSetVec1;
-           
-            cout << endl << "Testing SetLst<char>..." << endl;
+        
             lasd::SetLst<char> setlst;
             Empty(loctestnum, loctesterr, setlst, true);
             Size(loctestnum, loctesterr, setlst, true, 0);
@@ -183,7 +181,7 @@ namespace lasd{
             loctestnum++; loctesterr++;
             cout << endl << "Unmanaged error! " << endl;
         }
-        cout << "End of Set<char> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        cout << "End of Set CHAR Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }
@@ -191,10 +189,9 @@ namespace lasd{
     void testSetDouble(uint & testnum, uint & testerr) 
     {
         uint loctestnum = 0, loctesterr = 0;
-        cout << endl << "Begin of Set<double> Test:" << endl;
+        cout << endl << "Begin of Set DOUBLE Tests:" << endl;
         try {  
             // Test SetVec
-            cout << endl << "Testing SetVec<double>..." << endl;
             lasd::SetVec<double> setvec;
             Empty(loctestnum, loctesterr, setvec, true);
             Size(loctestnum, loctesterr, setvec, true, 0);
@@ -223,7 +220,6 @@ namespace lasd{
             setvec = equalSetVec1;
     
             // Test SetLst
-            cout << endl << "Testing SetLst<double>..." << endl;
             lasd::SetLst<double> setlst;
             Empty(loctestnum, loctesterr, setlst, true);
             Size(loctestnum, loctesterr, setlst, true, 0);
@@ -267,7 +263,7 @@ namespace lasd{
             loctestnum++; loctesterr++;
             cout << endl << "Unmanaged error! " << endl;
         }
-        cout << "End of Set<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+        cout << "End of Set DOUBLE Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
         testnum += loctestnum;
         testerr += loctesterr;
     }
